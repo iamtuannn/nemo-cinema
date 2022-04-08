@@ -17,7 +17,7 @@ export default function NavbarAdmin() {
         <Dropdown.Link to={`/admin/${type}`} target="_parent">
           {`manage ${type}`}
         </Dropdown.Link>
-        <Dropdown.Link to={`/admin/${type}/edit`} target="_parent">
+        <Dropdown.Link to={`/admin/${type}/add`} target="_parent">
           {`add ${type}`}
         </Dropdown.Link>
       </Dropdown.Content>
