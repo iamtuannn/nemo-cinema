@@ -1,26 +1,27 @@
 import axios from "axios";
-import { TMDB, CYBER_SOFT, TOKEN } from "../util/config";
+import { TMDB, CYBER_SOFT, TOKEN } from "../utils/config";
 
 class CyberSoftServices {
   get = (url) =>
-    axios.get({
+    axios({
       url: `${CYBER_SOFT}/${url}`,
+      method: "GET",
       headers: {
         Authorization: `Bearer ${localStorage.getItem(TOKEN)}`,
       },
     });
 
   post = (url, model) =>
-    axios.post({
+    axios({
       url: `${CYBER_SOFT}/${url}`,
+      method: "POST",
       data: model,
       headers: {
         Authorization: `Bearer ${localStorage.getItem(TOKEN)}`,
       },
     });
-
-  put = (url, model) => {
-    let promise = axios({
+  put = (url, model) =>
+    axios({
       url: `${CYBER_SOFT}/${url}`,
       method: "PUT",
       data: model,
@@ -28,19 +29,15 @@ class CyberSoftServices {
         Authorization: `Bearer ${localStorage.getItem(TOKEN)}`,
       },
     });
-    return promise;
-  };
 
-  delete = (url) => {
-    let promise = axios({
+  delete = (url) =>
+    axios({
       url: `${CYBER_SOFT}/${url}`,
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${localStorage.getItem(TOKEN)}`,
       },
     });
-    return promise;
-  };
 
   getTMDB = (url) => {
     return axios({
@@ -48,8 +45,6 @@ class CyberSoftServices {
       url: `${TMDB}${url}`,
     });
   };
-
-  
 }
 
 export const cyberSoftServices = new CyberSoftServices();
