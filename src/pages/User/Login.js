@@ -31,8 +31,7 @@ export default function Login() {
     <S.Box>
       <S.Form
         onFinish={formik.handleSubmit}
-        labelCol={{ span: 8 }}
-        wrapperCol={{ span: 24 }}
+        labelCol={{ span: 6 }}
       >
         <S.Center>
          <Link to="/"> <S.Logo className="logo">nemo cinema</S.Logo></Link>
@@ -53,7 +52,7 @@ export default function Login() {
           <Input.Password onChange={formik.handleChange} />
         </AntDesignFormItem>
         <S.Center>
-          <StyledButton type="submit">Login</StyledButton>
+          <StyledButton type="submit">Log In</StyledButton>
         </S.Center>
       </S.Form>
     </S.Box>
@@ -78,6 +77,7 @@ const S = {
     box-shadow: var(--shadow-light);
     border-radius: 1rem;
     background-color: var(--rgba-blue-magenta);
+    width: 600px;
   `,
 
   Logo: styled.span`
