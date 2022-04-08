@@ -9,29 +9,31 @@ export default function NavbarAdmin() {
   const navigate = useNavigate();
 
   const type = ["movie", "news", "user"];
+  const hideBar = () => setShowBar(false);
 
   const manageLink = (type) => (
     <Dropdown.Box key={type}>
       <Dropdown.Block>{type}</Dropdown.Block>
       <Dropdown.Content className="dropdown-content">
-        <Dropdown.Link to={`/admin/${type}`} target="_parent">
+        <Dropdown.Link to={`/admin/${type}`} onClick={hideBar}>
           {`manage ${type}`}
         </Dropdown.Link>
-        <Dropdown.Link to={`/admin/${type}/add`} target="_parent">
+        <Dropdown.Link to={`/admin/${type}/add`} onClick={hideBar}>
           {`add ${type}`}
         </Dropdown.Link>
       </Dropdown.Content>
     </Dropdown.Box>
   );
 
-  const navbar = (display) => (
-    <Nav.List display={display}>
+  const navbar = () => (
+    <Nav.List style={showBar ? { top: "70px" } : {}}>
       {type.map((type) => manageLink(type))}
       <Dropdown.LogOut
         onClick={() => {
           localStorage.removeItem(USER_LOGIN);
           localStorage.removeItem(TOKEN);
           navigate("/");
+          setShowBar(false)
         }}
       >
         Log Out
@@ -42,15 +44,15 @@ export default function NavbarAdmin() {
   return (
     <Nav.Box>
       <Nav.Wrapper>
-        <Nav.LogoBar color={showBar ? "var(--color-red)" : "transparent"}>
-          <Link to="/" target="_parent">
-            <Nav.Logo>Nemo cinema</Nav.Logo>
+        <Nav.LogoBar>
+          <Link to="/" onClick={hideBar}>
+            <Nav.Logo className="logo">Nemo cinema</Nav.Logo>
           </Link>
           <Nav.Icon onClick={() => setShowBar(!showBar)}>
             {showBar ? <Nav.CloseIcon /> : <Nav.BarIcon />}
           </Nav.Icon>
         </Nav.LogoBar>
-        {showBar ? navbar("block") : navbar("none")}
+       {navbar()}
       </Nav.Wrapper>
     </Nav.Box>
   );
@@ -90,7 +92,6 @@ const Nav = {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid ${(props) => props.color};
     }
   `,
 
@@ -150,13 +151,15 @@ const Nav = {
     display: flex;
     align-items: center;
     justify-content: center;
-    animation: fade-in 1s ease-in-out;
 
     @media (max-width: 900px) {
-      display: ${(props) => props.display};
       width: 100%;
       flex-direction: column;
       justify-content: flex-start;
+      position: absolute;
+      top: -100%;
+      z-index: 999;
+      transition: all 1s ease-in-out;
     }
   `,
 };

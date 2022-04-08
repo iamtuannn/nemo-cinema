@@ -10,18 +10,16 @@ export default function NavbarHome() {
 
   const user = JSON.parse(localStorage.getItem("USER_LOGIN")) || "";
 
+  const hideBar = () => setShowBar(false);
+
   function isLogin() {
     if (Object.keys(user).length === 0) {
       return (
         <Dropdown.Box>
           <Dropdown.Block>Login / Register</Dropdown.Block>
           <Dropdown.Content className="dropdown-content">
-            <Dropdown.Link to="/login" target="_parent">
-              Login
-            </Dropdown.Link>
-            <Dropdown.Link to="/register" target="_parent">
-              Register
-            </Dropdown.Link>
+            <Dropdown.Link to="/login" onClick={hideBar}>Login</Dropdown.Link>
+            <Dropdown.Link to="/register" onClick={hideBar}>Register</Dropdown.Link>
           </Dropdown.Content>
         </Dropdown.Box>
       );
@@ -31,14 +29,10 @@ export default function NavbarHome() {
       <Dropdown.Box>
         <Dropdown.User>Hi, {user.hoTen}</Dropdown.User>
         <Dropdown.Content className="dropdown-content">
-          <Dropdown.Link to="/profile" target="_parent">
-            Profile
-          </Dropdown.Link>
-          <Dropdown.Link to="/history" target="_parent">
-            Booking History
-          </Dropdown.Link>
+          <Dropdown.Link to="/profile" onClick={hideBar}>Profile</Dropdown.Link>
+          <Dropdown.Link to="/history" onClick={hideBar}>Booking History</Dropdown.Link>
           {user.maLoaiNguoiDung === "QuanTri" ? (
-            <Dropdown.Link to="/admin">Dashboard</Dropdown.Link>
+            <Dropdown.Link to="/admin" onClick={hideBar}>Dashboard</Dropdown.Link>
           ) : (
             <></>
           )}
@@ -47,6 +41,7 @@ export default function NavbarHome() {
               localStorage.removeItem(USER_LOGIN);
               localStorage.removeItem(TOKEN);
               navigate("/");
+              setShowBar(false)
             }}
           >
             Log Out
@@ -56,36 +51,32 @@ export default function NavbarHome() {
     );
   }
 
-  const navbar = (display) => (
-    <Nav.List display={display}>
-      <Nav.Link to="/now-showing" target="_parent">
-        Now Showing
-      </Nav.Link>
-      <Nav.Link to="/coming-soon" target="_parent">
-        Coming Soon
-      </Nav.Link>
-      <Nav.Link to="/news" target="_parent">
-        News
-      </Nav.Link>
-      <Nav.Link to="/actor" target="_parent">
-        Actor
-      </Nav.Link>
-      {isLogin()}
-    </Nav.List>
-  );
-
   return (
     <Nav.Box>
       <Nav.Wrapper>
-        <Nav.LogoBar color={showBar ? "var(--color-red)" : "transparent"}>
-          <Link to="/" target="_parent">
-            <Nav.Logo>Nemo cinema</Nav.Logo>
+        <Nav.LogoBar>
+          <Link to="/">
+            <Nav.Logo className="logo">Nemo cinema</Nav.Logo>
           </Link>
           <Nav.Icon onClick={() => setShowBar(!showBar)}>
             {showBar ? <Nav.CloseIcon /> : <Nav.BarIcon />}
           </Nav.Icon>
         </Nav.LogoBar>
-        {showBar ? navbar("block") : navbar("none")}
+        <Nav.List style={showBar ? { top: "70px" } : {}}>
+          <Nav.Link to="/now-showing" onClick={hideBar}>
+            Now Showing
+          </Nav.Link>
+          <Nav.Link to="/coming-soon" onClick={hideBar}>
+            Coming Soon
+          </Nav.Link>
+          <Nav.Link to="/news" onClick={hideBar}>
+            News
+          </Nav.Link>
+          <Nav.Link to="/actor" onClick={hideBar}>
+            Actor
+          </Nav.Link>
+          {isLogin()}
+        </Nav.List>
       </Nav.Wrapper>
     </Nav.Box>
   );
@@ -125,7 +116,6 @@ const Nav = {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid ${(props) => props.color};
     }
   `,
 
@@ -186,13 +176,17 @@ const Nav = {
     display: flex;
     align-items: center;
     justify-content: center;
-    animation: fade-in 1s ease-in-out;
 
     @media (max-width: 900px) {
-      display: ${(props) => props.display};
+      display: block;
       width: 100%;
       flex-direction: column;
       justify-content: flex-start;
+      transition: all 1s ease-in-out 0s;
+      position: absolute;
+      top: -100%;
+      background-color: var(--color-nav);
+      z-index: 999;
     }
   `,
 };
@@ -224,6 +218,7 @@ const Dropdown = {
     cursor: pointer;
     width: 100%;
     border-radius: 4px;
+    font-family: "Khand", sans-serif;
 
     @media (max-width: 900px) {
       padding: 1rem 1.5rem;
@@ -239,13 +234,19 @@ const Dropdown = {
     background-color: var(--color-magenta);
     box-shadow: var(--shadow-dark);
     z-index: 100;
-    width: 100%;
     border-radius: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0 0.5rem;
+    width: max-content;
 
     @media (max-width: 900px) {
       position: unset;
       box-shadow: none;
       border-radius: 0;
+      transform: translateX(0);
+      width: 100%;
+      padding: 0;
     }
   `,
   User: styled.span`
@@ -262,6 +263,7 @@ const Dropdown = {
     cursor: pointer;
     width: 100%;
     border-radius: 4px;
+    font-family: "Khand", sans-serif;
 
     @media (max-width: 900px) {
       padding: 1rem 1.5rem;
@@ -279,6 +281,9 @@ const Dropdown = {
     display: block;
     border-radius: 4px;
     font-family: "Khand", sans-serif;
+    width: 100%;
+    margin: 0.5rem 0;
+    text-align: center;
 
     :hover {
       color: var(--text-light);
@@ -292,6 +297,7 @@ const Dropdown = {
       border-bottom: var(--border);
       border-radius: 0;
       background-color: var(--color-nav);
+      text-align: left;
 
       :hover {
         border: 0;
@@ -305,15 +311,18 @@ const Dropdown = {
     font-size: 1.25rem;
     line-height: 1.75rem;
     padding: 0.5rem 1.25rem;
-    margin: 0.5rem;
     color: var(--text-light);
     display: block;
     border-radius: 4px;
-    transition: all 0.5s ease-in-out;
+    cursor: pointer;
+    width: 100%;
+    margin: 0.5rem 0;
+    text-align: center;
+    font-family: "Khand", sans-serif;
 
     :hover {
       color: var(--text-light);
-      background-color: var(--color-magenta);
+      border: var(--border);
     }
 
     @media (max-width: 900px) {
@@ -322,6 +331,11 @@ const Dropdown = {
       margin: 0;
       border-bottom: var(--border);
       border-radius: 0;
+
+      :hover {
+        border: 0;
+        border-bottom: var(--border);
+      }
     }
   `,
 };
