@@ -18,8 +18,12 @@ export default function NavbarHome() {
         <Dropdown.Box>
           <Dropdown.Block>Login / Register</Dropdown.Block>
           <Dropdown.Content className="dropdown-content">
-            <Dropdown.Link to="/login" onClick={hideBar}>Login</Dropdown.Link>
-            <Dropdown.Link to="/register" onClick={hideBar}>Register</Dropdown.Link>
+            <Dropdown.Link to="/login" onClick={hideBar}>
+              Login
+            </Dropdown.Link>
+            <Dropdown.Link to="/register" onClick={hideBar}>
+              Register
+            </Dropdown.Link>
           </Dropdown.Content>
         </Dropdown.Box>
       );
@@ -29,10 +33,16 @@ export default function NavbarHome() {
       <Dropdown.Box>
         <Dropdown.User>Hi, {user.hoTen}</Dropdown.User>
         <Dropdown.Content className="dropdown-content">
-          <Dropdown.Link to="/profile" onClick={hideBar}>Profile</Dropdown.Link>
-          <Dropdown.Link to="/history" onClick={hideBar}>Booking History</Dropdown.Link>
+          <Dropdown.Link to="/profile" onClick={hideBar}>
+            Profile
+          </Dropdown.Link>
+          <Dropdown.Link to="/history" onClick={hideBar}>
+            Booking History
+          </Dropdown.Link>
           {user.maLoaiNguoiDung === "QuanTri" ? (
-            <Dropdown.Link to="/admin" onClick={hideBar}>Dashboard</Dropdown.Link>
+            <Dropdown.Link to="/admin" onClick={hideBar}>
+              Dashboard
+            </Dropdown.Link>
           ) : (
             <></>
           )}
@@ -41,7 +51,7 @@ export default function NavbarHome() {
               localStorage.removeItem(USER_LOGIN);
               localStorage.removeItem(TOKEN);
               navigate("/");
-              setShowBar(false)
+              setShowBar(false);
             }}
           >
             Log Out
@@ -55,7 +65,7 @@ export default function NavbarHome() {
     <Nav.Box>
       <Nav.Wrapper>
         <Nav.LogoBar>
-          <Link to="/">
+          <Link to="/" onClick={hideBar}>
             <Nav.Logo className="logo">Nemo cinema</Nav.Logo>
           </Link>
           <Nav.Icon onClick={() => setShowBar(!showBar)}>

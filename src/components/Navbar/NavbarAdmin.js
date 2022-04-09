@@ -45,7 +45,7 @@ export default function NavbarAdmin() {
     <Nav.Box>
       <Nav.Wrapper>
         <Nav.LogoBar>
-          <Link to="/" onClick={hideBar}>
+          <Link to="/" onClick={hideBar} >
             <Nav.Logo className="logo">Nemo cinema</Nav.Logo>
           </Link>
           <Nav.Icon onClick={() => setShowBar(!showBar)}>
