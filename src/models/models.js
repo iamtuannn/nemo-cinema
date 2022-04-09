@@ -70,6 +70,7 @@ export class NewsModel {
   popular = false;
   trending = false;
   body = "";
+  __v = 0;
 }
 
 class SweetAlert {
