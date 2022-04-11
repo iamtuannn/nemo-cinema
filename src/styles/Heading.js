@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Breakpoints } from "./Breakpoints";
 
-export const Heading = styled.h3`
+export const Heading = styled.h2`
   font-size: 4em;
   font-weight: 600;
   font-family: "Khand", sans-serif;
