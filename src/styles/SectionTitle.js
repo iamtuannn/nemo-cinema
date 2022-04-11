@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 
-export const SectionTitle = styled.h2`
+export const SectionTitle = styled.h3`
   display: block;
   position: relative;
   line-height: 1.3;
