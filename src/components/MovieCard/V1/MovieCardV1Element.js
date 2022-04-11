@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const Card = styled.div`
-  background-color: var(--color-secondary);
+  background-color: var(--rgba-blue-magenta);
   border-radius: 8px;
   overflow: hidden;
   max-width: 100%;
@@ -14,25 +14,23 @@ export const Rounded = styled.div`
 
 export const Content = styled.div`
   position: relative;
-  height: calc(((100vw - 3rem) / 2) * 1.5);
-  max-height: calc(((100vw - 3rem) / 2) * 1.5);
   min-height: calc(((100vw - 3rem) / 2) * 1.5);
 
   @media (min-width: 768px) {
-    height: calc(((100vw - 7rem) / 4) * 1.5);
-    max-height: calc(((100vw - 7rem) / 4) * 1.5);
+    min-height: calc(((100vw - 4rem) / 3) * 1.5);
+  }
+  @media (min-width: 1024px) {
     min-height: calc(((100vw - 7rem) / 4) * 1.5);
   }
 
   @media (min-width: 1440px) {
-    height: calc(((1440px - 8rem) / 5) * 1.5);
-    max-height: calc(((1440px - 8rem) / 5) * 1.5);
     min-height: calc(((1440px - 8rem) / 5) * 1.5);
   }
 `;
 
 export const Poster = styled.img`
   height: inherit;
+  width: 100%;
   transition: transform 0.5s ease-in-out;
   ${Content}:hover & {
     transform: scale(1.1);

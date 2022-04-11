@@ -8,7 +8,7 @@ export const MovieCardV2 = ({ movie }) => (
   <S.Card>
     <LazyLoad height={100}>
       <S.Wrapper>
-        <Link to={`/movie/${movie.biDanh}-${movie.maPhim}/`}>
+        <Link to={`/movie/${movie.biDanh}-${movie.maPhim}/`} target="_top">
           <S.Poster
             src={movie.hinhAnh !== "" ? movie.hinhAnh : noImage}
             alt={movie.tenPhim}
@@ -18,7 +18,7 @@ export const MovieCardV2 = ({ movie }) => (
 
         <S.Content>
           <div>
-            <Link to={`/movie/${movie.biDanh}-${movie.maPhim}/`}>
+            <Link to={`/movie/${movie.biDanh}-${movie.maPhim}/`} target="_top">
               <S.Name>{movie.tenPhim}</S.Name>
             </Link>
             <S.ReleaseDate>

@@ -44,7 +44,10 @@ export const MovieCardV1 = ({ movie }) => {
               <S.Name>{movie.tenPhim}</S.Name>
             </S.Flex>
             {Date.now() > Date.parse(movie.ngayKhoiChieu) ? (
-              <S.StyledLink to={`/movie/${movie.biDanh}-${movie.maPhim}/`}>
+              <S.StyledLink
+                to={`/movie/${movie.biDanh}-${movie.maPhim}/`}
+                target="_top"
+              >
                 GET TICKETS
               </S.StyledLink>
             ) : (
