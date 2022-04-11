@@ -7,7 +7,7 @@ export const NewsCardV2 = ({ news }) => (
   <NewsCard.MB>
     <LazyLoad height={400}>
       <NewsCard.Box>
-        <Link to={`/news/${news.titleUrl}/`}>
+        <Link to={`/news/${news.titleUrl}/`} target="_parent">
           <NewsCard.Image
             src={news.imageUrl !== "" ? news.imageUrl : noImage}
             alt={news.title}
@@ -30,13 +30,9 @@ const NewsCard = {
     overflow: hidden;
     animation: fade-in 1s ease-in-out 0s;
 
-    :last-child {
-      margin-bottom: 0;
-    }
   `,
   Box: styled.div`
     background: var(--color-secondary);
-    animation: fade-in 1s ease-in-out 0s;
   `,
 
   Image: styled.img`

@@ -9,7 +9,7 @@ export const NewsCardV1 = ({ news }) => (
   <NewsCard.MB>
     <LazyLoad height={100}>
       <NewsCard.Box>
-        <Link to={`/news/${news.titleUrl}/`}>
+        <Link to={`/news/${news.titleUrl}/`} target="_parent">
           <NewsCard.Image
             src={news.imageUrl !== "" ? news.imageUrl : noImage}
             alt={news.title}
@@ -17,7 +17,7 @@ export const NewsCardV1 = ({ news }) => (
           />
         </Link>
         <NewsCard.Content>
-          <Link to={`/news/${news.titleUrl}/`}>
+          <Link to={`/news/${news.titleUrl}/`} target="_parent">
             <NewsCard.Title>{news.title}</NewsCard.Title>
           </Link>
           <div>
@@ -46,6 +46,7 @@ const NewsCard = {
     overflow: hidden;
     display: grid;
     grid-template-columns: 30% 1fr;
+    animation: fade-in 1s ease-in-out 0s both;
 
     ${Breakpoints.lg} {
       grid-template-columns: 40% 1fr;
@@ -56,7 +57,6 @@ const NewsCard = {
     max-width: 100%;
     min-height: 100%;
     background-color: var(--rgba-blue-magenta);
-    animation: zoom-left 1s ease-in-out 0s;
   `,
 
   Content: styled.div`
@@ -64,7 +64,7 @@ const NewsCard = {
     flex-direction: column;
     justify-content: space-around;
     padding: 2rem;
-    animation: fade-in-bottom 1s ease-in-out 0s backwards;
+
   `,
 
   Col: styled.div``,
