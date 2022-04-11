@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { Breakpoints } from "../../styles/Breakpoints";
 import male from "../../images/people-male.svg";
@@ -89,7 +89,7 @@ const S = {
     }
   `,
   Card: styled.div`
-    box-sizing: 0.5rem;
+    border-radius: 0.5rem;
     overflow: hidden;
     position: relative;
     animation: fade-in 1s ease-in-out 0s both;
@@ -97,6 +97,11 @@ const S = {
   Image: styled.img`
     max-width: 100%;
     background-color: var(--color-secondary);
+    transition: all 1s ease-in-out;
+
+    :hover{
+      transform: scale(1.2);
+    }
   `,
   Content: styled.div`
     position: absolute;

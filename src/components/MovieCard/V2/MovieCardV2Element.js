@@ -12,7 +12,7 @@ export const Card = styled.div`
   }
 
   @media (min-width: 1024px) {
-    display: ${(props) => (props.block ? "block" : "none")};
+    display: ${(props) => (props.display ? props.display : "none")};
   }
 `;
 
