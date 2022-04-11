@@ -321,7 +321,7 @@ export const FlexInitial = styled.div`
 `;
 
 export const Card = styled.div`
-  margin: 0 0.75rem;
+  margin: 0 0.5rem;
   width: 120px;
   border-radius: 6px;
   overflow: hidden;
@@ -333,6 +333,7 @@ export const Card = styled.div`
 
   @media (min-width: 768px) {
     width: 150px;
+    margin: 0 0.75rem;
   }
 `;
 
