@@ -96,3 +96,13 @@ export class SweetAlertWarning extends SweetAlert {
   title = "Warning";
   text = "You must login to continue";
 }
+
+export class SweetAlertQuestion extends SweetAlert {
+  icon = "question";
+}
+
+export class BookingModel{
+  maLichChieu = 0;
+  danhSachVe = [];
+  taiKhoanNguoiDung = "";
+}
