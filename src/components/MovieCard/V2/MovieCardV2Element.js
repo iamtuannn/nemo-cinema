@@ -1,16 +1,15 @@
 import styled from "styled-components";
 
-
 export const Card = styled.div`
   margin-top: 1rem;
   width: 100%;
   border-radius: 8px;
   overflow: hidden;
   background: var(--color-secondary);
+
   :first-child {
     margin-top: 0;
   }
-  position: relative;
 
   @media (min-width: 1024px) {
     display: ${(props) => (props.block ? "block" : "none")};
@@ -21,6 +20,7 @@ export const Wrapper = styled.div`
   display: flex;
   height: auto;
   max-height: 141px;
+  animation: fade-in 1s ease-in-out 0s both;
   @media (min-width: 1024px) {
     max-height: 204px;
   }
@@ -32,14 +32,12 @@ export const Poster = styled.img`
   width: 94px;
   height: 141px;
   background-color: var(--rgba-blue-magenta);
-  animation: zoom-left 1s ease-in-out 0s;
 
   @media (min-width: 1024px) {
     min-width: 136px;
     min-height: 204px;
     width: 136px;
     height: 204px;
-
   }
 `;
 
@@ -48,7 +46,6 @@ export const Content = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  animation: fade-in-bottom 1s ease-in-out 0s both;
 `;
 
 export const Name = styled.h2`

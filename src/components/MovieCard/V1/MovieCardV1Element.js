@@ -2,28 +2,14 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const Card = styled.div`
-  background-color: var(--rgba-blue-magenta);
+  background-color: var(--color-secondary);
   border-radius: 8px;
   overflow: hidden;
-  width: calc((100vw - 3rem) / 2);
-  min-width: calc((100vw - 3rem) / 2);
-  max-width: calc((100vw - 2rem) / 2);
-
-  @media (min-width: 768px) {
-    width: calc((100vw- 7rem) / 4);
-    min-width: calc((100vw - 7rem) / 4);
-    max-width: calc((100vw - 7rem) / 4);
-  }
-
-  @media (min-width: 1440px) {
-    width: calc((1440px - 8rem) / 5);
-    min-width: calc((1440px - 8rem) / 5);
-    max-width: calc((1440px - 8rem) / 5);
-  }
+  max-width: 100%;
 `;
 
 export const Rounded = styled.div`
-  animation: fade-in-bottom 1s ease-in-out 0s both;
+  animation: fade-in 1s ease-in-out 0s both;
 `;
 
 export const Content = styled.div`
