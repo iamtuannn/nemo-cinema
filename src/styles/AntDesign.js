@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import { Form, Table } from "antd";
+import { Form, Table, Tabs } from "antd";
 import { Breakpoints } from "./Breakpoints";
 
 export const AntDesignTable = styled(Table)`
-    max-width: 1440px;
-    margin: 0 auto;
+  max-width: 1440px;
+  margin: 0 auto;
 
   .ant-table-tbody > tr.ant-table-row > td {
     background: var(--lumber);
@@ -82,7 +82,7 @@ export const AntDesignFormItem = styled(Form.Item)`
     color: var(--light);
   }
 
-  .ant-input{
+  .ant-input {
     font-size: 1.3rem;
   }
 
@@ -96,5 +96,26 @@ export const AntDesignFormItem = styled(Form.Item)`
 
   .ant-form-item-explain-error {
     text-align: left;
+  }
+`;
+
+export const AntDesignTab = styled(Tabs)`
+  background: var(--color-secondary);  
+  padding: 0.5rem 0;
+  border-radius: 8px;
+  .ant-tabs-ink-bar {
+    background: var(--color-red);
+  }
+  .ant-tabs-ink-bar.ant-tabs-ink-bar-animated {
+    width: 2px;
+  }
+  div.ant-tabs-content-holder {
+    border-left: 2px solid #f0f0f0;
+    margin-left: -2px;
+    div.ant-tabs-content {
+      div.ant-tabs-tabpane {
+        padding: 0 16px;
+      }
+    }
   }
 `;
