@@ -182,7 +182,12 @@ const S = {
     grid-template-columns: 300px 1fr;
     gap: 2rem;
 
-    ${Breakpoints.md} {
+    ${Breakpoints.lg} {
+      grid-template-columns: 200px 1fr;
+      gap: 1rem;
+    }
+
+    ${Breakpoints.sm} {
       grid-template-columns: repeat(1, minmax(0, 1fr));
     }
   `,
@@ -192,12 +197,19 @@ const S = {
     margin-bottom: 1rem;
   `,
   Image: styled.img`
-    max-width: 100%;
+    width: 300px;
+    height: 450px;
     border-radius: 0.5rem;
-    background-color: var(--color-secondary);
+    background-color: var(--rgba-blue-magenta);
 
-    ${Breakpoints.md} {
+    ${Breakpoints.lg} {
+      width: 200px;
+      height: 300px;
+    }
+
+    ${Breakpoints.sm} {
       width: 50vw;
+      min-height: 75vw;
     }
   `,
 };
@@ -212,16 +224,23 @@ const Bio = {
     display: block;
     color: var(--text-light);
 
-    ${Breakpoints.md} {
+    ${Breakpoints.sm} {
       display: none;
     }
   `,
   Content: styled.div`
-    @media (min-width: 768px) {
-      max-height: 312px;
-      min-height: 312px;
+    height: 312px;
+    overscroll-behavior-y: auto;
+    overflow-y: auto;
+
+    ${Breakpoints.lg} {
+      height: 152px;
       overscroll-behavior-y: auto;
       overflow-y: auto;
+    }
+
+    ${Breakpoints.sm} {
+      height: auto;
     }
   `,
 
@@ -237,7 +256,7 @@ const Info = {
     color: var(--text-light);
     text-align: center;
 
-    ${Breakpoints.md} {
+    ${Breakpoints.sm} {
       display: block;
     }
   `,
@@ -249,7 +268,7 @@ const Info = {
   AKA: styled.div`
     display: block;
 
-    ${Breakpoints.md} {
+    ${Breakpoints.sm} {
       display: none;
     }
   `,
