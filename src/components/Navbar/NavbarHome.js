@@ -18,10 +18,10 @@ export default function NavbarHome() {
         <Dropdown.Box>
           <Dropdown.Block>Login / Register</Dropdown.Block>
           <Dropdown.Content className="dropdown-content">
-            <Dropdown.Link to="/login" onClick={hideBar}>
+            <Dropdown.Link to="/login" onClick={hideBar} target="_parent">
               Login
             </Dropdown.Link>
-            <Dropdown.Link to="/register" onClick={hideBar}>
+            <Dropdown.Link to="/register" onClick={hideBar} target="_parent">
               Register
             </Dropdown.Link>
           </Dropdown.Content>
@@ -33,14 +33,14 @@ export default function NavbarHome() {
       <Dropdown.Box>
         <Dropdown.User>Hi, {user.hoTen}</Dropdown.User>
         <Dropdown.Content className="dropdown-content">
-          <Dropdown.Link to="/profile" onClick={hideBar}>
+          <Dropdown.Link to="/profile" onClick={hideBar} target="_parent">
             Profile
           </Dropdown.Link>
-          <Dropdown.Link to="/history" onClick={hideBar}>
+          <Dropdown.Link to="/history" onClick={hideBar} target="_parent">
             Booking History
           </Dropdown.Link>
           {user.maLoaiNguoiDung === "QuanTri" ? (
-            <Dropdown.Link to="/admin" onClick={hideBar}>
+            <Dropdown.Link to="/admin" onClick={hideBar} target="_parent">
               Dashboard
             </Dropdown.Link>
           ) : (
@@ -73,16 +73,16 @@ export default function NavbarHome() {
           </Nav.Icon>
         </Nav.LogoBar>
         <Nav.List style={showBar ? { top: "70px" } : {}}>
-          <Nav.Link to="/now-showing" onClick={hideBar}>
+          <Nav.Link to="/now-showing" onClick={hideBar} target="_parent">
             Now Showing
           </Nav.Link>
-          <Nav.Link to="/coming-soon" onClick={hideBar}>
+          <Nav.Link to="/coming-soon" onClick={hideBar} target="_parent">
             Coming Soon
           </Nav.Link>
-          <Nav.Link to="/news" onClick={hideBar}>
+          <Nav.Link to="/news" onClick={hideBar} target="_parent">
             News
           </Nav.Link>
-          <Nav.Link to="/actor" onClick={hideBar}>
+          <Nav.Link to="/actor" onClick={hideBar} target="_parent">
             Actor
           </Nav.Link>
           {isLogin()}
@@ -96,7 +96,7 @@ const Nav = {
   Box: styled.div`
     background-color: var(--color-nav);
     padding: 0.5rem 1rem;
-
+    
     @media (max-width: 900px) {
       padding: 0.5rem 0;
     }
