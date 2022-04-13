@@ -8,12 +8,11 @@ import { BASE_API_PERSON_URL } from "../../utils/config";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getActorList } from "../../redux/actions";
-import { Container } from "../../styles/Container";
-import { Heading } from "../../styles/Heading";
+import { Heading, Container } from "../../styles/Styles";
 import Pagination from "../../components/Pagination/Pagination";
 import LazyLoad from "react-lazyload";
 
-export default function Actor() {
+export default function People() {
   const { actor, totalPages } = useSelector((state) => state.PeopleReducer);
   const { isLoading } = useSelector((state) => state.LoadingReducer);
   const params = useParams();
@@ -43,7 +42,7 @@ export default function Actor() {
                 target="_parent"
                 key={index}
               >
-                <LazyLoad height={400}>
+                <LazyLoad height={300}>
                   <S.Card>
                     <S.Image
                       src={
@@ -92,14 +91,14 @@ const S = {
     border-radius: 0.5rem;
     overflow: hidden;
     position: relative;
-    animation: fade-in 1s ease-in-out 0s both;
+    animation: fade-in 1s ease-in-out;
   `,
   Image: styled.img`
     max-width: 100%;
     background-color: var(--color-secondary);
-    transition: all 1s ease-in-out;
+    transition: all 0.5s ease-in-out;
 
-    :hover{
+    :hover {
       transform: scale(1.2);
     }
   `,

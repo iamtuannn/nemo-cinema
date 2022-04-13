@@ -7,10 +7,11 @@ import styled from "styled-components";
 import bg from "../../images/bg.jpg";
 import { LoginAction } from "../../redux/actions";
 import { AntDesignForm, AntDesignFormItem } from "../../styles/AntDesign";
-import { StyledButton } from "../../styles/StyledButton";
-import { USER_LOGIN } from "../../utils/config";
+import { StyledButton } from "../../styles/Styles";
+import { NEMO, USER_LOGIN } from "../../utils/config";
 
 export default function Login() {
+  document.title = `Log In Now - ${NEMO}`;
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -29,12 +30,12 @@ export default function Login() {
   }
   return (
     <S.Box>
-      <S.Form
-        onFinish={formik.handleSubmit}
-        labelCol={{ span: 6 }}
-      >
+      <S.Form onFinish={formik.handleSubmit} labelCol={{ span: 6 }}>
         <S.Center>
-         <Link to="/"> <S.Logo className="logo">nemo cinema</S.Logo></Link>
+          <Link to="/">
+            {" "}
+            <S.Logo className="logo">nemo cinema</S.Logo>
+          </Link>
         </S.Center>
         <AntDesignFormItem
           label="Username"
@@ -52,6 +53,11 @@ export default function Login() {
           <Input.Password onChange={formik.handleChange} />
         </AntDesignFormItem>
         <S.Center>
+          <S.Text>
+            Don't have an account yet? <Link to="/signup">Sign Up Now</Link>
+          </S.Text>
+        </S.Center>
+        <S.Center>
           <StyledButton type="submit">Log In</StyledButton>
         </S.Center>
       </S.Form>
@@ -61,7 +67,8 @@ export default function Login() {
 
 const S = {
   Box: styled.div`
-    background-image: url(${bg});
+       background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+      url(${bg});
     min-height: 100vh;
     background-size: cover;
     background-repeat: no-repeat;
@@ -91,5 +98,8 @@ const S = {
   Center: styled.div`
     display: flex;
     justify-content: center;
+  `,
+  Text: styled.span`
+    padding: 1rem 0;
   `,
 };

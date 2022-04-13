@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { MdPerson, MdClear } from "react-icons/md";
 import { useDispatch } from "react-redux";
-import { SweetAlertQuestion } from "../../../models/models";
+import { SweetAlertQuestion } from "../../models/models";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 

@@ -3,13 +3,13 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import noImage from "../../images/no-image.svg";
 import { useNavigate, useParams } from "react-router-dom";
-import { Container } from "../../styles/Container";
+import { Container, SectionTitle } from "../../styles/Styles";
 import { Breakpoints } from "../../styles/Breakpoints";
 import { getNewsAction } from "../../redux/actions";
 import styled from "styled-components";
 import { NewsCardV2 } from "../../components/NewsCard/NewsCardV2";
 import Loading from "../../components/Loading/Loading";
-import { SectionTitle } from "../../styles/SectionTitle";
+
 
 export default function News() {
   const news = useSelector((state) => state.NewsReducer.news);

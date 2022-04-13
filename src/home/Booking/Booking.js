@@ -1,15 +1,15 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { BookingAction, getMovieShowTimesAction } from "../../../redux/actions";
+import { BookingAction, getMovieShowTimesAction } from "../../redux/actions";
 import _ from "lodash";
 import { StyledBooking } from "./BookingElements";
 import { Form, Input } from "antd";
-import { BookingModel } from "../../../models/models";
-import Loading from "../../../components/Loading/Loading";
+import { BookingModel } from "../../models/models";
+import Loading from "../../components/Loading/Loading";
 import GridSeat from "./GridSeat";
 import { useNavigate, useParams } from "react-router-dom";
-import { Container } from "../../../styles/Container";
-import { SweetAlertWarning } from "../../../models/models";
+import { Container } from "../../styles/Styles";
+import { SweetAlertWarning } from "../../models/models";
 import Swal from "sweetalert2";
 
 const alertWarning = new SweetAlertWarning();

@@ -4,12 +4,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { Breakpoints } from "../../styles/Breakpoints";
 import { getPersonAction } from "../../redux/actions";
-import { BASE_API_PERSON_URL, NEMO } from "../../utils/config";
-import { SectionTitle } from "../../styles/SectionTitle";
+import { BASE_API_PERSON_URL } from "../../utils/config";
 import male from "../../images/people-male.svg";
 import female from "../../images/people-female.svg";
 import moment from "moment";
-import { Container } from "../../styles/Container";
+import { Container, SectionTitle } from "../../styles/Styles";
 import { MovieCardV3 } from "../../components/MovieCard/V3/MovieCardV3";
 import Loading from "../../components/Loading/Loading";
 
@@ -23,21 +22,7 @@ export default function Person() {
 
   useEffect(() => {
     dispatch(getPersonAction(params.id, params.nameUrl, navigate));
-    document.title = `${person.name} - ${NEMO}`;
   }, [dispatch, params.id, params.nameUrl, navigate, person.name]);
-
-  console.log(
-    acting
-      .filter(
-        (movie) =>
-          movie.release_date !== "" &&
-          moment(movie.release_date).format("YYYY") < 2023
-      )
-      .sort((a, b) =>
-        Date.parse(a.release_date) < Date.parse(b.release_date) ? 1 : -1
-      )
-      .slice(0, 5)
-  );
 
   const renderBio = () => (
     <Bio.Box>

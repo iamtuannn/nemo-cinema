@@ -1,23 +1,22 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { getMovieDetailAction } from "../../../redux/actions";
+import { getMovieDetailAction } from "../../redux/actions";
 import {
   BASE_API_BACKDROP_URL,
   BASE_API_POSTER_URL,
   BASE_API_PERSON_URL,
-} from "../../../utils/config";
+} from "../../utils/config";
 import * as S from "./MovieDetailElements";
 import { FaPlay } from "react-icons/fa";
 import getVideoId from "get-video-id";
 import moment from "moment";
-import female from "../../../images/people-female.svg";
-import male from "../../../images/people-male.svg";
+import female from "../../images/people-female.svg";
+import male from "../../images/people-male.svg";
 import { Tabs } from "antd";
-import Loading from "../../../components/Loading/Loading";
-import { Container } from "../../../styles/Container";
-import { SectionTitle } from "../../../styles/SectionTitle";
-import { AntDesignTab } from "../../../styles/AntDesign";
+import Loading from "../../components/Loading/Loading";
+import { Container, SectionTitle } from "../../styles/Styles";
+import { AntDesignTab } from "../../styles/AntDesign";
 
 const { TabPane } = Tabs;
 

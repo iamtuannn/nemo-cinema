@@ -7,11 +7,12 @@ import styled from "styled-components";
 import bg from "../../images/bg.jpg";
 import * as Yup from "yup";
 import { AntDesignForm, AntDesignFormItem } from "../../styles/AntDesign";
-import { StyledButton } from "../../styles/StyledButton";
-import { GROUPID, USER_LOGIN } from "../../utils/config";
+import { StyledButton } from "../../styles/Styles";
+import { GROUPID, NEMO, USER_LOGIN } from "../../utils/config";
 import { RegisterAction } from "../../redux/actions";
 
-export default function Register() {
+export default function SignUp() {
+  document.title = `Sign Up Now - ${NEMO}`;
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -58,9 +59,7 @@ export default function Register() {
   }
   return (
     <S.Box>
-      <S.Form
-        onFinish={formik.handleSubmit}
-      >
+      <S.Form onFinish={formik.handleSubmit}>
         <S.Center>
           <Link to="/">
             <S.Logo className="logo">nemo cinema</S.Logo>
@@ -181,7 +180,8 @@ export default function Register() {
 
 const S = {
   Box: styled.div`
-    background-image: url(${bg});
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+      url(${bg});
     min-height: 100vh;
     background-size: cover;
     background-repeat: no-repeat;
@@ -206,7 +206,6 @@ const S = {
         color: var(--color-red);
       }
     }
-
   `,
 
   Logo: styled.span`
