@@ -14,7 +14,7 @@ export const Rounded = styled.div`
 
 export const Content = styled.div`
   position: relative;
-  min-height: calc(((100vw - 3rem) / 2) * 1.5);
+  min-height: calc(((100vw - 4rem) / 2) * 1.5);
 
   @media (min-width: 768px) {
     min-height: calc(((100vw - 5rem) / 3) * 1.5);
