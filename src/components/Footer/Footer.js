@@ -16,7 +16,8 @@ export default function Footer() {
 }
 
 const S = {
-  Box: styled.div`
+  Box: styled.footer`
+    margin-top: auto;
     padding: 1rem 0;
     display: flex;
     align-items: center;
