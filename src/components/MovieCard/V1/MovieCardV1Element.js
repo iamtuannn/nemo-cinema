@@ -17,7 +17,7 @@ export const Content = styled.div`
   min-height: calc(((100vw - 3rem) / 2) * 1.5);
 
   @media (min-width: 768px) {
-    min-height: calc(((100vw - 4rem) / 3) * 1.5);
+    min-height: calc(((100vw - 5rem) / 3) * 1.5);
   }
   @media (min-width: 1024px) {
     min-height: calc(((100vw - 7rem) / 4) * 1.5);
