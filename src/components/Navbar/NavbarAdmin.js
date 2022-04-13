@@ -2,38 +2,35 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { FaBars, FaPlus } from "react-icons/fa";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { TOKEN, USER_LOGIN } from "../../utils/config";
+import { NavAdminLink, TOKEN, USER_LOGIN } from "../../utils/config";
 
 export default function NavbarAdmin() {
   const [showBar, setShowBar] = useState(false);
   const navigate = useNavigate();
 
-  const type = ["movie", "news", "user"];
-  const hideBar = () => setShowBar(false);
-
-  const manageLink = (type) => (
-    <Dropdown.Box key={type}>
-      <Dropdown.Block>{type}</Dropdown.Block>
-      <Dropdown.Content className="dropdown-content">
-        <Dropdown.Link to={`/admin/${type}`} onClick={hideBar}>
-          {`manage ${type}`}
-        </Dropdown.Link>
-        <Dropdown.Link to={`/admin/${type}/add`} onClick={hideBar}>
-          {`add ${type}`}
-        </Dropdown.Link>
-      </Dropdown.Content>
-    </Dropdown.Box>
-  );
+  const renderLink = () =>
+    NavAdminLink.map((el) => (
+      <Dropdown.Box key={el.type}>
+        <Dropdown.Block>{el.type}</Dropdown.Block>
+        <Dropdown.Content className="dropdown-content">
+          {el.link.map((el) => (
+            <Dropdown.Link key={el.name} to={el.path} onClick={()=> setShowBar(false)}>
+              {el.name}
+            </Dropdown.Link>
+          ))}
+        </Dropdown.Content>
+      </Dropdown.Box>
+    ));
 
   const navbar = () => (
     <Nav.List style={showBar ? { top: "70px" } : {}}>
-      {type.map((type) => manageLink(type))}
+      {renderLink()}
       <Dropdown.LogOut
         onClick={() => {
           localStorage.removeItem(USER_LOGIN);
           localStorage.removeItem(TOKEN);
           navigate("/");
-          setShowBar(false)
+          setShowBar(false);
         }}
       >
         Log Out
@@ -45,21 +42,21 @@ export default function NavbarAdmin() {
     <Nav.Box>
       <Nav.Wrapper>
         <Nav.LogoBar>
-          <Link to="/" onClick={hideBar} >
+          <Link to="/" onClick={()=> setShowBar(false)}>
             <Nav.Logo className="logo">Nemo cinema</Nav.Logo>
           </Link>
           <Nav.Icon onClick={() => setShowBar(!showBar)}>
             {showBar ? <Nav.CloseIcon /> : <Nav.BarIcon />}
           </Nav.Icon>
         </Nav.LogoBar>
-       {navbar()}
+        {navbar()}
       </Nav.Wrapper>
     </Nav.Box>
   );
 }
 
 const Nav = {
-  Box: styled.div`
+  Box: styled.header`
     background-color: var(--color-nav);
     padding: 0.5rem 1rem;
 
@@ -135,7 +132,7 @@ const Nav = {
 
     :hover {
       color: var(--text-light);
-      background-color: var(--color-magenta);
+      background-color: var(--rgba-blue-magenta);
     }
 
     @media (max-width: 900px) {
@@ -172,7 +169,7 @@ const Dropdown = {
     user-select: none;
     margin: 0 0.5rem;
     transition: all 0.5s ease-in-out;
-    background-color: var(--color-magenta);
+    background-color: var(--rgba-blue-magenta);
     border-radius: 4px;
 
     :hover .dropdown-content {
@@ -237,16 +234,19 @@ const Dropdown = {
     padding: 0.5rem 1.25rem;
     color: var(--text-light);
     display: block;
-    border-radius: 4px;
     text-transform: capitalize;
     transition: all 0.5s ease-in-out;
     width: 100%;
     margin: 0.5rem 0;
     text-align: center;
+    border-bottom: 1px solid var(--light);
+
+    :last-child{
+      border-bottom: none;
+    }
 
     :hover {
-      color: var(--color-red);
-      background-color: var(--text-light);
+      color: var(--text-light);
     }
 
     @media (max-width: 900px) {
@@ -258,7 +258,7 @@ const Dropdown = {
 
       :hover {
         color: var(--text-light);
-        background-color: var(--color-magenta);
+        background-color: var(--rgba-blue-magenta);
       }
     }
   `,

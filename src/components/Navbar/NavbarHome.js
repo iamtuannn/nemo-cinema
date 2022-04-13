@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { FaBars, FaPlus } from "react-icons/fa";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { TOKEN, USER_LOGIN } from "../../utils/config";
+import { NavBarLink, TOKEN, USER_LOGIN } from "../../utils/config";
 
 export default function NavbarHome() {
   const [showBar, setShowBar] = useState(false);
@@ -10,7 +10,21 @@ export default function NavbarHome() {
 
   const user = JSON.parse(localStorage.getItem("USER_LOGIN")) || "";
 
-  const hideBar = () => setShowBar(false);
+  function renderLink({ navLink = false, path, name }) {
+    if (navLink) {
+      return (
+        <Nav.Link to={path} key={name} onClick={() => setShowBar(false)}>
+          {name}
+        </Nav.Link>
+      );
+    }
+
+    return (
+      <Dropdown.Link to={path} onClick={() => setShowBar(false)}>
+        {name}
+      </Dropdown.Link>
+    );
+  }
 
   function isLogin() {
     if (Object.keys(user).length === 0) {
@@ -18,12 +32,8 @@ export default function NavbarHome() {
         <Dropdown.Box>
           <Dropdown.Block>Login / Register</Dropdown.Block>
           <Dropdown.Content className="dropdown-content">
-            <Dropdown.Link to="/login" onClick={hideBar} target="_parent">
-              Login
-            </Dropdown.Link>
-            <Dropdown.Link to="/register" onClick={hideBar} target="_parent">
-              Register
-            </Dropdown.Link>
+            {renderLink({ path: "/login", name: "Log In" })}
+            {renderLink({ path: "/signup", name: "Sign Up" })}
           </Dropdown.Content>
         </Dropdown.Box>
       );
@@ -33,16 +43,10 @@ export default function NavbarHome() {
       <Dropdown.Box>
         <Dropdown.User>Hi, {user.hoTen}</Dropdown.User>
         <Dropdown.Content className="dropdown-content">
-          <Dropdown.Link to="/profile" onClick={hideBar} target="_parent">
-            Profile
-          </Dropdown.Link>
-          <Dropdown.Link to="/history" onClick={hideBar} target="_parent">
-            Booking History
-          </Dropdown.Link>
+          {renderLink({ path: "/profile", name: "Profile" })}
+          {renderLink({ path: "/history", name: "Booking History" })}
           {user.maLoaiNguoiDung === "QuanTri" ? (
-            <Dropdown.Link to="/admin" onClick={hideBar} target="_parent">
-              Dashboard
-            </Dropdown.Link>
+            <>{renderLink({ path: "/admin", name: "Dashboard" })}</>
           ) : (
             <></>
           )}
@@ -65,7 +69,7 @@ export default function NavbarHome() {
     <Nav.Box>
       <Nav.Wrapper>
         <Nav.LogoBar>
-          <Link to="/" onClick={hideBar}>
+          <Link to="/" onClick={()=> setShowBar(false)}>
             <Nav.Logo className="logo">Nemo cinema</Nav.Logo>
           </Link>
           <Nav.Icon onClick={() => setShowBar(!showBar)}>
@@ -73,18 +77,7 @@ export default function NavbarHome() {
           </Nav.Icon>
         </Nav.LogoBar>
         <Nav.List style={showBar ? { top: "70px" } : {}}>
-          <Nav.Link to="/now-showing" onClick={hideBar} target="_parent">
-            Now Showing
-          </Nav.Link>
-          <Nav.Link to="/coming-soon" onClick={hideBar} target="_parent">
-            Coming Soon
-          </Nav.Link>
-          <Nav.Link to="/news" onClick={hideBar} target="_parent">
-            News
-          </Nav.Link>
-          <Nav.Link to="/actor" onClick={hideBar} target="_parent">
-            Actor
-          </Nav.Link>
+          {NavBarLink.map((link) => renderLink(link))}
           {isLogin()}
         </Nav.List>
       </Nav.Wrapper>
@@ -93,10 +86,10 @@ export default function NavbarHome() {
 }
 
 const Nav = {
-  Box: styled.div`
+  Box: styled.header`
     background-color: var(--color-nav);
     padding: 0.5rem 1rem;
-    
+
     @media (max-width: 900px) {
       padding: 0.5rem 0;
     }
@@ -170,7 +163,7 @@ const Nav = {
 
     :hover {
       color: var(--text-light);
-      background-color: var(--color-magenta);
+      background-color: var(--rgba-blue-magenta);
     }
 
     @media (max-width: 900px) {
@@ -232,7 +225,7 @@ const Dropdown = {
 
     @media (max-width: 900px) {
       padding: 1rem 1.5rem;
-      background-color: var(--color-magenta);
+      background-color: var(--rgba-blue-magenta);
       border: none;
       border-bottom: var(--border);
       border-radius: 0;
@@ -241,7 +234,7 @@ const Dropdown = {
   Content: styled.div`
     display: none;
     position: absolute;
-    background-color: var(--color-magenta);
+    background-color: var(--rgba-blue-magenta);
     box-shadow: var(--shadow-dark);
     z-index: 100;
     border-radius: 8px;
@@ -297,7 +290,7 @@ const Dropdown = {
 
     :hover {
       color: var(--text-light);
-      border: var(--border);
+      border: 1px solid var(--light);
     }
 
     @media (max-width: 900px) {
@@ -332,7 +325,7 @@ const Dropdown = {
 
     :hover {
       color: var(--text-light);
-      border: var(--border);
+      border: 1px solid var(--color-red);
     }
 
     @media (max-width: 900px) {
