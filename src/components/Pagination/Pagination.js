@@ -15,12 +15,12 @@ export default function Pagination({ page, totalPages }) {
       </p>
       <S.Flex>
         {page > 1 ? (
-          <S.Button onClick={() => navigate(`/actor/${page - 1}`)}>
+          <S.Button onClick={() => navigate(`/people/${page - 1}`)}>
             <FaChevronCircleLeft />
           </S.Button>
         ) : null}
         {page < totalPages ? (
-          <S.Button onClick={() => navigate(`/actor/${page + 1}`)}>
+          <S.Button onClick={() => navigate(`/people/${page + 1}`)}>
             <FaChevronCircleRight />
           </S.Button>
         ) : null}
