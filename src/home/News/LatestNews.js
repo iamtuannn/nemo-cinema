@@ -6,6 +6,7 @@ import { Heading, Container } from "../../styles/Styles";
 import { NewsCardV1 } from "../../components/NewsCard/NewsCardV1";
 import { NewsCardV2 } from "../../components/NewsCard/NewsCardV2";
 import Loading from "../../components/Loading/Loading";
+import { LoadingCardV1 } from "../../components/Loading/LoadingCard";
 
 export default function LatestNews() {
   const news = useSelector((state) => state.NewsReducer.newsList);
@@ -37,11 +38,18 @@ export default function LatestNews() {
 
   return (
     <Container>
+      <Heading>Latest News</Heading>
       {isLoading ? (
-        <Loading />
+        <>
+          <LoadingCardV1 />
+          <LoadingCardV1 />
+          <LoadingCardV1 />
+          <LoadingCardV1 />
+          <LoadingCardV1 />
+          <LoadingCardV1 />
+        </>
       ) : (
         <>
-          <Heading>Latest News</Heading>
           {news.map((news, index) => (
             <Fragment key={index}>
               {isMobile ? (
