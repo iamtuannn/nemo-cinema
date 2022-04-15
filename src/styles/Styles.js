@@ -5,11 +5,11 @@ export const Container = styled.div`
   min-height: 100vh;
   margin: 0 auto;
   max-width: 1440px;
-  padding: 2rem;
+  padding: 1rem;
   animation: fade-in 1s ease-in-out 0s both;
 
-  ${Breakpoints.lg} {
-    padding: 1rem;
+  @media (min-width: 1024px) {
+    padding: 2rem;
   }
 `;
 
@@ -94,5 +94,34 @@ export const StyledButton = styled.button`
 
   ${Breakpoints.sm} {
     font-size: 1.2rem;
+  }
+`;
+
+export const GridCardV1 = styled.div`
+  display: ${(props) => (props.grid ? "grid" : "none")};
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  @media (min-width: 768px) {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  @media (min-width: 1024px) {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  @media (min-width: 1440px) {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+`;
+
+export const GridCardV2 = styled.div`
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+
+  @media (min-width: 768px) {
+    display: ${(props) => (props.grid ? "grid" : "none")};
   }
 `;
