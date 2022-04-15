@@ -1,3 +1,5 @@
+import { GROUPID } from "../utils/config";
+
 class Cinema {
   cumRapChieu = [];
   logo = "";
@@ -101,8 +103,18 @@ export class SweetAlertQuestion extends SweetAlert {
   icon = "question";
 }
 
-export class BookingModel{
+export class BookingModel {
   maLichChieu = 0;
   danhSachVe = [];
   taiKhoanNguoiDung = "";
+}
+
+export class UserModel {
+  taiKhoan = "";
+  email = "";
+  soDt = "";
+  hoTen = "";
+  matKhau = "";
+  maLoaiNguoiDung = "";
+  maNhom = GROUPID;
 }
