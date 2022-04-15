@@ -1,6 +1,7 @@
 import { applyMiddleware, combineReducers, createStore } from "redux";
 import thunk from "redux-thunk";
 import { MovieModel, NewsModel, PersonModel } from "../models/models";
+import { TOKEN, USER_LOGIN } from "../utils/config";
 
 let user = {};
 
@@ -131,7 +132,7 @@ const CinemaReducer = (
         seatUpdate.push(action.seatIsSelected);
       }
 
-      return { ...state };
+      return { ...state, seatIsBooking: seatUpdate };
     }
 
     case "GET_CINEMA": {
@@ -144,9 +145,9 @@ const CinemaReducer = (
   }
 };
 
-const LoadingReducer = (state = { isLoading: false }, action) => {
+const LoadingReducer = (state = { isLoading: true }, action) => {
   switch (action.type) {
-    case "DISPLAY_LOADING": {
+    case "SHOW_LOADING": {
       state.isLoading = true;
       return { ...state };
     }
