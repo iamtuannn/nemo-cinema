@@ -69,7 +69,7 @@ export default function NavbarHome() {
     <Nav.Box>
       <Nav.Wrapper>
         <Nav.LogoBar>
-          <Link to="/" onClick={()=> setShowBar(false)}>
+          <Link to="/" onClick={() => setShowBar(false)}>
             <Nav.Logo className="logo">Nemo cinema</Nav.Logo>
           </Link>
           <Nav.Icon onClick={() => setShowBar(!showBar)}>
@@ -96,7 +96,8 @@ const Nav = {
   `,
 
   Wrapper: styled.div`
-    width: 85%;
+    max-width: 1440px;
+    width: 90%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -115,19 +116,29 @@ const Nav = {
   LogoBar: styled.div`
     @media (max-width: 900px) {
       width: 100%;
-      padding: 0 2rem;
+      padding: 0.25rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
   `,
 
+  LogoLinK: styled(Link)``,
+
   Logo: styled.span`
     font-size: 2.5rem;
-    font-family: "Khand", sans-serif;
+    font-family: "Changa", sans-serif;
     text-transform: uppercase;
     color: var(--color-red);
     font-weight: 700;
+
+    @media (max-width: 1024px) {
+      font-size: 2.2rem;
+    }
+
+    @media (max-width: 400px) {
+      font-size: 1.8rem;
+    }
   `,
 
   Icon: styled.div`
@@ -154,7 +165,7 @@ const Nav = {
     font-size: 1.25rem;
     line-height: 1.75rem;
     padding: 0.5rem 1.25rem;
-    margin-right: 0.5rem;
+    margin-right: 0.25rem;
     color: var(--text-light);
     display: block;
     border-radius: 4px;
@@ -164,6 +175,10 @@ const Nav = {
     :hover {
       color: var(--text-light);
       background-color: var(--rgba-blue-magenta);
+    }
+
+    @media (max-width: 1024px) {
+      padding: 0.75rem;
     }
 
     @media (max-width: 900px) {
