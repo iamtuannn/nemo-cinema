@@ -100,7 +100,6 @@ export const AntDesignFormItem = styled(Form.Item)`
 `;
 
 export const AntDesignTab = styled(Tabs)`
-  background: var(--color-secondary);  
   padding: 0.5rem 0;
   border-radius: 8px;
   .ant-tabs-ink-bar {
