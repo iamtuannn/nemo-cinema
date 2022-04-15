@@ -2,6 +2,7 @@ import React from "react";
 import * as ReactDOMClient from "react-dom/client";
 import { Provider } from "react-redux";
 import App from "./App";
+import { GlobalStyles } from "./styles/GlobalStyles";
 
 import "antd/dist/antd.min.css";
 import "slick-carousel/slick/slick.css";
