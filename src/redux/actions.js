@@ -1,22 +1,26 @@
+import axios from "axios";
 import Swal from "sweetalert2";
 import {
   SweetAlertFailure,
   SweetAlertSuccessful,
   SweetAlertWarning,
 } from "../models/models";
-import { cyberSoftServices } from "../services/cybersoftServices";
-import { dbMovie, TMDB_KEY } from "../utils/config";
+import { cyberSoftServices } from "../services/cyberSoftServices";
+import { newsService } from "../services/newsServices";
+import {
+  API_NEWS,
+  dbMovie,
+  GROUPID,
+  NEMO,
+  TMDB_KEY,
+  USER_LOGIN,
+} from "../utils/config";
 
 const alertUserSuccess = new SweetAlertSuccessful();
 const alertUserFailure = new SweetAlertFailure();
 const alertWarning = new SweetAlertWarning();
 
-function push(path) {
-  history.push(path || "/");
-  window.location.reload();
-}
-
-export const LoginAction = (userInfo) => {
+export const LoginAction = (userInfo, navigate) => {
   return async (dispatch) => {
     try {
       const result = await cyberSoftServices.post(
@@ -31,29 +35,40 @@ export const LoginAction = (userInfo) => {
 
       Swal.fire({
         ...alertUserSuccess,
-        didDestroy: () => push(),
+        didDestroy: () => navigate("/"),
       });
-    } catch (error) {
+    } catch (errors) {
       alertUserFailure.title = "Login Failed";
       alertUserFailure.text = "User Name or Your Password are not correct!";
       Swal.fire({ ...alertUserFailure });
-      console.log("errors", error.response?.data);
+      console.log("errors", errors.response);
     }
   };
 };
 
-export const RegisterAction = (userInfo) => {
+export const RegisterAction = (userInfo, navigate) => {
   return async () => {
     try {
       await cyberSoftServices.post(`api/QuanLyNguoiDung/DangKy`, userInfo);
+
+      alertUserSuccess.title = "Successful Registration";
       Swal.fire({
         ...alertUserSuccess,
-        didDestroy: () => push(),
+        didDestroy: () => navigate("/login"),
       });
     } catch (errors) {
       alertUserFailure.title = "Register Fail";
-      alertUserFailure.text = errors.response?.data;
+
+      if (errors.response.data === "Email đã tồn tại!") {
+        alertUserFailure.text = "Email already exists!";
+      }
+
+      if (errors.response.data === "Tài khoản đã tồn tại!") {
+        alertUserFailure.text = "Account already exists!";
+      }
+
       Swal.fire({ ...alertUserFailure });
+      console.log("errors", errors.response);
     }
   };
 };
@@ -61,14 +76,7 @@ export const RegisterAction = (userInfo) => {
 export const getAccountInfoAction = (account) => {
   return async (dispatch) => {
     try {
-      if (!localStorage.getItem(USER_LOGIN)) {
-        Swal.fire({
-          ...alertWarning,
-          didDestroy: () => {
-            push("/login");
-          },
-        });
-      }
+      dispatch(showLoadingAction)
 
       const result = await cyberSoftServices.post(
         `api/QuanLyNguoiDung/ThongTinTaiKhoan`,
@@ -80,8 +88,11 @@ export const getAccountInfoAction = (account) => {
         accountInfo: result.data,
         ticket: result.data.thongTinDatVe.reverse(),
       });
+
+      dispatch(hideLoadingAction)
     } catch (error) {
-      console.log("error", error.response?.data);
+      dispatch(hideLoadingAction)
+      console.log("error", error.response);
     }
   };
 };
@@ -113,8 +124,8 @@ export const putUpdateUserAction = (userUpdate) => {
   };
 };
 
-export const displayLoadingAction = {
-  type: "DISPLAY_LOADING",
+export const showLoadingAction = {
+  type: "SHOW_LOADING",
 };
 
 export const hideLoadingAction = {
@@ -124,7 +135,7 @@ export const hideLoadingAction = {
 export const getMoviesListAction = (movieName = "") => {
   return async (dispatch) => {
     try {
-      await dispatch(displayLoadingAction);
+      dispatch(showLoadingAction);
 
       let result = "";
 
@@ -146,9 +157,9 @@ export const getMoviesListAction = (movieName = "") => {
             Date.parse(a.ngayKhoiChieu) < Date.parse(b.ngayKhoiChieu) ? 1 : -1
           ),
       });
-      await dispatch(hideLoadingAction);
+      dispatch(hideLoadingAction);
     } catch (error) {
-      await dispatch(hideLoadingAction);
+      dispatch(hideLoadingAction);
       console.log("error: ", error.response?.data);
     }
   };
@@ -157,7 +168,7 @@ export const getMoviesListAction = (movieName = "") => {
 export const getMovieDetailAction = (id) => {
   return async (dispatch) => {
     try {
-      await dispatch(displayLoadingAction);
+      dispatch(showLoadingAction);
       let obj = dbMovie.find((movie) => movie.maPhim === id);
 
       let tmdb = await cyberSoftServices.getTMDB(
@@ -185,7 +196,7 @@ export const getMovieDetailAction = (id) => {
         trailer: cybersoft.data.trailer,
         titleUrl: cybersoft.data.biDanh,
         idMovie: cybersoft.data.maPhim,
-        release_date: tmdb.data.release_date,
+        release_date: cybersoft.data.ngayKhoiChieu,
         cast: cast.data.cast,
       };
 
@@ -194,10 +205,163 @@ export const getMovieDetailAction = (id) => {
         movie: movie,
       });
 
-      await dispatch(hideLoadingAction);
+      dispatch(hideLoadingAction);
     } catch (error) {
-      await dispatch(hideLoadingAction);
+      dispatch(hideLoadingAction);
       console.log("error: ", error);
+    }
+  };
+};
+
+export const getNewsAction = (url, navigate) => {
+  return async (dispatch) => {
+    try {
+      dispatch(showLoadingAction);
+      let news = await axios.get(`${API_NEWS}/${url}`);
+      dispatch({
+        type: "GET_NEWS_INFO",
+        news: news.data,
+      });
+      if (news.data === "") {
+        navigate("/");
+      }
+
+      dispatch(getNewsListAction());
+      document.title = `${news.data.title} - ${NEMO}/${url}`;
+      dispatch(hideLoadingAction);
+    } catch (error) {
+      dispatch(hideLoadingAction);
+      console.log(error);
+      navigate("/");
+    }
+  };
+};
+
+export const getNewsListAction = () => {
+  return async (dispatch) => {
+    try {
+      dispatch(showLoadingAction);
+      let result = await newsService.get();
+
+      dispatch({
+        type: "GET_NEWS_LIST",
+        newsList: result.data.news.sort((a, b) => {
+          return Date.parse(b.published) - Date.parse(a.published);
+        }),
+      });
+
+      dispatch(hideLoadingAction);
+    } catch (error) {
+      dispatch(hideLoadingAction);
+      console.log(error);
+    }
+  };
+};
+
+export const getActorList = (page, navigate) => async (dispatch) => {
+  try {
+    dispatch(showLoadingAction);
+    let actor = await cyberSoftServices.getTMDB(
+      `person/popular?api_key=${TMDB_KEY}&language=en-US&page=${page}`
+    );
+    dispatch({
+      type: "GET_ACTOR",
+      actor: actor.data.results,
+      totalPages: actor.data.total_pages,
+    });
+    
+    dispatch(hideLoadingAction);
+  } catch (error) {
+    navigate("/people")
+    dispatch(hideLoadingAction);
+    console.log("error: ", error.response?.data);
+  }
+};
+
+export const getPersonAction = (id, nameUrl, navigate) => {
+  return async (dispatch) => {
+    try {
+      dispatch(showLoadingAction);
+
+      let person = await cyberSoftServices.getTMDB(
+        `person/${id}?api_key=${TMDB_KEY}&language=en-US`
+      );
+      dispatch({
+        type: "GET_PERSON",
+        person: person.data,
+      });
+      let url = person.data.name.toLowerCase().split(" ").join("-");
+      if (url !== nameUrl) {
+        navigate("/actor");
+      }
+
+      let acting = await cyberSoftServices.getTMDB(
+        `person/${id}/movie_credits?api_key=${TMDB_KEY}&language=en-US`
+      );
+      dispatch({
+        type: "GET_ACTING",
+        acting: acting.data.cast,
+      });
+
+      document.title = `${person.data.name} - ${NEMO}`;
+
+      dispatch(hideLoadingAction)
+    } catch (error) {
+      dispatch(hideLoadingAction);
+      console.log("error: ", error.response?.data);
+    }
+  };
+};
+
+export const getMovieShowTimesAction = (id, navigate) => {
+  return async (dispatch) => {
+    try {
+      if (!localStorage.getItem(USER_LOGIN)) {
+        Swal.fire({ ...alertWarning, didDestroy: () => navigate("/") });
+      }
+
+      dispatch(showLoadingAction);
+
+      const result = await cyberSoftServices.get(
+        `api/QuanLyDatVe/LayDanhSachPhongVe?MaLichChieu=${id}`
+      );
+      document.title = `${result.data.thongTinPhim.tenPhim} - ${NEMO}`;
+
+      if (result.status === 200) {
+        dispatch({
+          type: "GET_CINEMA_SHOWTIME",
+          movieShowtime: result.data.thongTinPhim,
+          seat: result.data.danhSachGhe,
+          seatIsBooking: [],
+        });
+      }
+      dispatch(hideLoadingAction);
+    } catch (error) {
+      dispatch(hideLoadingAction);
+      console.log("error", error.response?.data);
+    }
+  };
+};
+
+export const BookingAction = (bookingInfo, navigate) => {
+  return async () => {
+    try {
+      await cyberSoftServices.post(`api/QuanLyDatVe/DatVe`, bookingInfo);
+      alertUserSuccess.title = "Successfully Booked";
+      alertUserSuccess.text = "Enjoy your movie!";
+      Swal.fire({
+        ...alertUserSuccess,
+        didDestroy: () => {
+          navigate("/history");
+        },
+      });
+    } catch (error) {
+      alertUserFailure.title = "Book Failed";
+      alertUserFailure.text = `${error.response?.data}`;
+      Swal.fire({
+        ...alertUserFailure,
+      });
+      console.log(error);
     }
   };
 };
