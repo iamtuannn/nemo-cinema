@@ -21,7 +21,7 @@ export default function UserInfo() {
   const user = useSelector((state) => state.UserReducer.accountInfo);
   const isLoading = useSelector((state) => state.LoadingReducer.isLoading);
 
-  console.log(user)
+  console.log(user);
 
   let userLogin = localStorage.getItem(USER_LOGIN)
     ? JSON.parse(localStorage.getItem(USER_LOGIN))
@@ -140,11 +140,9 @@ export default function UserInfo() {
           <div className="error">{formik.errors.email}</div>
         ) : null}
       </StyledForm.Antd.Item>
-      <S.Center>
-        <StyledButton type="submit" textTransform="uppercase">
-          Update
-        </StyledButton>
-      </S.Center>
+      <StyledButton type="submit" textTransform="uppercase">
+        Update
+      </StyledButton>
     </StyledForm.Antd>
   );
 
@@ -160,7 +158,7 @@ export default function UserInfo() {
               <User.Name>{user.hoTen}</User.Name>
             </S.Col>
           </User.Box>
-          <S.Center half>{renderForm()}</S.Center>
+          <S.Center>{renderForm()}</S.Center>
         </S.Box>
       )}
     </S.Background>
@@ -169,7 +167,6 @@ export default function UserInfo() {
 
 const S = {
   Background: styled.div`
-    position: relative;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -180,33 +177,24 @@ const S = {
   `,
   Box: styled.div`
     max-width: 1024px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    margin: 0 auto;
+    min-height: inherit;
     display: flex;
     flex-direction: row-reverse;
-    z-index: 5;
-    padding-top: 0;
-    height: 100%;
     width: 100%;
     animation: fade-in 1s ease-in-out 0s both;
-    ${Breakpoints.lg} {
-      position: unset;
-      top: 0;
-      left: 0;
-      transform: none;
+    ${Breakpoints.md} {
       flex-direction: column;
-      padding-top: 2rem;
+      padding: 2rem 0;
     }
   `,
   Center: styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: ${(props) => (props.half ? "50%" : "")};
+    width: 70%;
 
-    ${Breakpoints.lg} {
+    ${Breakpoints.md} {
       width: 100%;
     }
   `,
@@ -258,7 +246,7 @@ const StyledForm = {
       font-size: 1.3rem;
     }
 
-    ${Breakpoints.lg} {
+    ${Breakpoints.md} {
       label,
       input {
         font-size: 1rem;
@@ -271,7 +259,7 @@ const StyledForm = {
     margin-bottom: 2rem;
     color: var(--text-light);
 
-    ${Breakpoints.lg} {
+    ${Breakpoints.md} {
       font-size: 1.5rem;
       margin-bottom: 1rem;
     }
@@ -283,10 +271,9 @@ const User = {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
-    width: 50%;
+    width: 30%;
     user-select: none;
-    ${Breakpoints.lg} {
+    ${Breakpoints.md} {
       width: 100%;
     }
   `,
@@ -296,7 +283,7 @@ const User = {
     border-radius: 50%;
     overflow: hidden;
 
-    ${Breakpoints.lg} {
+    ${Breakpoints.md} {
       width: 150px;
       height: 150px;
     }
@@ -308,7 +295,7 @@ const User = {
     padding-top: 1.5rem;
     color: var(--text-light);
 
-    ${Breakpoints.lg} {
+    ${Breakpoints.md} {
       font-size: 2rem;
     }
   `,
