@@ -14,10 +14,11 @@ export const Rounded = styled.div`
 
 export const Content = styled.div`
   position: relative;
-  min-height: calc(((100vw - 4rem) / 2) * 1.5);
+  min-height: calc(((100vw - 5rem) / 2) * 1.5);
+  overflow: hidden;
 
   @media (min-width: 768px) {
-    min-height: calc(((100vw - 5rem) / 3) * 1.5);
+    min-height: calc(((100vw - 6rem) / 3) * 1.5);
   }
   @media (min-width: 1024px) {
     min-height: calc(((100vw - 7rem) / 4) * 1.5);
@@ -32,6 +33,7 @@ export const Poster = styled.img`
   height: inherit;
   width: 100%;
   transition: transform 0.5s ease-in-out;
+
   ${Content}:hover & {
     transform: scale(1.1);
   }
