@@ -9,7 +9,7 @@ export const MovieCardV1 = ({ movie }) => {
   const dispatch = useDispatch();
   return (
     <S.Card>
-      <LazyLoad height={400}>
+      <LazyLoad height={200}>
         <S.Rounded>
           <S.Content>
             {movie.hinhAnh !== "" ? (
