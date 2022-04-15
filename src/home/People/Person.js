@@ -10,11 +10,11 @@ import female from "../../images/people-female.svg";
 import moment from "moment";
 import { Container, SectionTitle } from "../../styles/Styles";
 import { MovieCardV3 } from "../../components/MovieCard/V3/MovieCardV3";
-import Loading from "../../components/Loading/Loading";
+import { LoadingPageV0} from "../../components/Loading/Loading";
 
 export default function Person() {
   const { person, acting } = useSelector((state) => state.PeopleReducer);
-  const { isLoading } = useSelector((state) => state.LoadingReducer);
+   const isLoading = useSelector((state) => state.LoadingReducer.isLoading);
 
   const dispatch = useDispatch();
   const params = useParams();
@@ -131,7 +131,7 @@ export default function Person() {
   return (
     <>
       {isLoading ? (
-        <Loading />
+        <LoadingPageV0 />
       ) : (
         <Container>
           <S.Gird>

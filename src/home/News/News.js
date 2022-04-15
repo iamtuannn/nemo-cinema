@@ -8,7 +8,7 @@ import { Breakpoints } from "../../styles/Breakpoints";
 import { getNewsAction } from "../../redux/actions";
 import styled from "styled-components";
 import { NewsCardV2 } from "../../components/NewsCard/NewsCardV2";
-import Loading from "../../components/Loading/Loading";
+import { LoadingPageV0 } from "../../components/Loading/Loading";
 
 
 export default function News() {
@@ -16,7 +16,7 @@ export default function News() {
   const latest = useSelector((state) => state.NewsReducer.newsList);
   const popular = latest.filter((news) => news.popular === true);
   const trending = latest.filter((news) => news.trending === true);
-  const { isLoading } = useSelector((state) => state.LoadingReducer);
+   const isLoading = useSelector((state) => state.LoadingReducer.isLoading);
 
   const dispatch = useDispatch();
   const params = useParams();
@@ -38,11 +38,11 @@ export default function News() {
   );
 
   return (
-    <Container>
+    <>
       {isLoading ? (
-        <Loading />
+        <LoadingPageV0 />
       ) : (
-        <>
+        <Container>
           <S.Box>
             <S.Article>
               <S.ArticleHeader>
@@ -85,9 +85,9 @@ export default function News() {
               ))}
             </Latest.Grid>
           </Latest.Box>
-        </>
+        </Container>
       )}
-    </Container>
+    </>
   );
 }
 

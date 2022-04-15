@@ -12,12 +12,16 @@ import { Breakpoints } from "../../styles/Breakpoints";
 import bg from "../../images/bg.jpg";
 import avatar from "../../images/user.jpg";
 import { StyledButton } from "../../styles/Styles";
+import { LoadingPageV0 } from "../../components/Loading/Loading";
 
 export default function UserInfo() {
   document.title = `User Information - ${NEMO}`;
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.UserReducer.accountInfo);
+  const isLoading = useSelector((state) => state.LoadingReducer.isLoading);
+
+  console.log(user)
 
   let userLogin = localStorage.getItem(USER_LOGIN)
     ? JSON.parse(localStorage.getItem(USER_LOGIN))
@@ -146,15 +150,19 @@ export default function UserInfo() {
 
   return (
     <S.Background>
-      <S.Box>
-        <User.Box>
-          <S.Col>
-            <User.Avatar src={avatar} alt="avatar" />
-            <User.Name>{user.hoTen}</User.Name>
-          </S.Col>
-        </User.Box>
-        <S.Center half>{renderForm()}</S.Center>
-      </S.Box>
+      {isLoading ? (
+        <LoadingPageV0 />
+      ) : (
+        <S.Box>
+          <User.Box>
+            <S.Col>
+              <User.Avatar src={avatar} alt="avatar" />
+              <User.Name>{user.hoTen}</User.Name>
+            </S.Col>
+          </User.Box>
+          <S.Center half>{renderForm()}</S.Center>
+        </S.Box>
+      )}
     </S.Background>
   );
 }
@@ -169,7 +177,6 @@ const S = {
       url(${bg});
     min-height: 100vh;
     width: 100%;
-    animation: fade-in 1s ease-in-out;
   `,
   Box: styled.div`
     max-width: 1024px;
@@ -183,6 +190,7 @@ const S = {
     padding-top: 0;
     height: 100%;
     width: 100%;
+    animation: fade-in 1s ease-in-out 0s both;
     ${Breakpoints.lg} {
       position: unset;
       top: 0;

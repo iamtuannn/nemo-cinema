@@ -1,38 +1,40 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import { Breakpoints } from "../../styles/Breakpoints";
 import male from "../../images/people-male.svg";
 import female from "../../images/people-female.svg";
-import Loading from "../../components/Loading/Loading";
-import { BASE_API_PERSON_URL } from "../../utils/config";
-import { Link, useParams } from "react-router-dom";
+import { BASE_API_PERSON_URL, NEMO } from "../../utils/config";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getActorList } from "../../redux/actions";
-import { Heading, Container } from "../../styles/Styles";
+import { Heading, Container, GridCardV1 } from "../../styles/Styles";
 import Pagination from "../../components/Pagination/Pagination";
 import LazyLoad from "react-lazyload";
+import { LoadingPageV2 } from "../../components/Loading/Loading";
 
 export default function People() {
+  document.title = `People Popular - ${NEMO}`;
+
   const { actor, totalPages } = useSelector((state) => state.PeopleReducer);
-  const { isLoading } = useSelector((state) => state.LoadingReducer);
+   const isLoading = useSelector((state) => state.LoadingReducer.isLoading);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const params = useParams();
   const page = parseInt(params.id) || 1;
 
-  const dispatch = useDispatch();
-
   useEffect(() => {
-    dispatch(getActorList(page));
+    dispatch(getActorList(page, navigate));
     window.scroll(0, 0);
-  }, [dispatch, page]);
+  }, [dispatch, page, navigate]);
 
   return (
-    <>
+    <Container>
+      <Heading>Popular People</Heading>
       {isLoading ? (
-        <Loading />
+        <LoadingPageV2 grid />
       ) : (
-        <Container>
-          <Heading>Popular People</Heading>
-          <S.Grid>
+        <>
+          <GridCardV1 grid>
             {actor.map((person, index) => (
               <Link
                 to={`/person/${person.name
@@ -41,62 +43,72 @@ export default function People() {
                   .join("-")}-${person.id}`}
                 target="_parent"
                 key={index}
+                id="person"
               >
-                <LazyLoad height={300}>
-                  <S.Card>
-                    <S.Image
-                      src={
-                        person.profile_path === null && person.gender === 1
-                          ? female
-                          : person.profile_path === null
-                          ? male
-                          : BASE_API_PERSON_URL + person.profile_path
-                      }
-                      alt={person.name}
-                    ></S.Image>
-                    <S.Content>
-                      <S.Name>{person.name}</S.Name>
-                    </S.Content>
-                  </S.Card>
-                </LazyLoad>
+                <S.Card>
+                  <LazyLoad height={400} style={{ height: "100%" }}>
+                    <S.Box>
+                      <S.Image
+                        src={
+                          person.profile_path === null && person.gender === 1
+                            ? female
+                            : person.profile_path === null
+                            ? male
+                            : `${BASE_API_PERSON_URL}${person.profile_path}`
+                        }
+                        alt={person.name}
+                      />
+                      <S.Content
+                        id="person-name"
+                        display={person.profile_path === null ? "block" : ""}
+                      >
+                        <S.Name>{person.name}</S.Name>
+                      </S.Content>
+                    </S.Box>
+                  </LazyLoad>
+                </S.Card>
               </Link>
             ))}
-          </S.Grid>
+          </GridCardV1>
           <Pagination page={page} totalPages={totalPages} />
-        </Container>
+        </>
       )}
-    </>
+    </Container>
   );
 }
 
 const S = {
-  Grid: styled.div`
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-
-    ${Breakpoints.lg} {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-
-    ${Breakpoints.md} {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    ${Breakpoints.sm} {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  `,
   Card: styled.div`
     border-radius: 0.5rem;
     overflow: hidden;
     position: relative;
-    animation: fade-in 1s ease-in-out;
+    background-color: var(--rgba-blue-magenta);
+    height: calc(((100vw - 5rem) / 2) * 1.5);
+
+    @media (min-width: 768px) {
+      height: calc(((100vw - 6rem) / 3) * 1.5);
+    }
+
+    @media (min-width: 1024px) {
+      height: calc(((100vw - 7rem) / 4) * 1.5);
+    }
+
+    @media (min-width: 1440px) {
+      height: calc(((1440px - 8rem) / 5) * 1.5);
+    }
+
+    :hover #person-name {
+      display: block;
+    }
+  `,
+  Box: styled.div`
+    animation: fade-in 1.5s ease-in-out 0s both;
+    height: 100%;
   `,
   Image: styled.img`
-    max-width: 100%;
-    background-color: var(--color-secondary);
+    width: 100%;
     transition: all 0.5s ease-in-out;
+    height: inherit;
 
     :hover {
       transform: scale(1.2);
@@ -113,6 +125,11 @@ const S = {
     display: flex;
     align-items: center;
     justify-content: center;
+    display: ${(props) => (props.display ? props.display : "none")};
+
+    @media (max-width: 1024px) {
+      display: block;
+    }
   `,
   Name: styled.span`
     overflow: hidden;

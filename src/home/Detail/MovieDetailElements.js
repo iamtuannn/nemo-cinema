@@ -3,6 +3,8 @@ import styled from "styled-components";
 
 export const BackDrop = styled.div`
   width: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
   position: relative;
   z-index: 1;
   animation: fade-in 1s ease-in-out 0s both;

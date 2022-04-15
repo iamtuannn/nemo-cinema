@@ -14,7 +14,7 @@ import moment from "moment";
 import female from "../../images/people-female.svg";
 import male from "../../images/people-male.svg";
 import { Tabs } from "antd";
-import Loading from "../../components/Loading/Loading";
+import { LoadingPageV0 } from "../../components/Loading/Loading";
 import { Container, SectionTitle } from "../../styles/Styles";
 import { AntDesignTab } from "../../styles/AntDesign";
 
@@ -22,7 +22,7 @@ const { TabPane } = Tabs;
 
 export default function MovieDetail() {
   const { movie } = useSelector((state) => state.MovieReducer);
-  const { isLoading } = useSelector((state) => state.LoadingReducer);
+   const isLoading = useSelector((state) => state.LoadingReducer.isLoading);
 
   const dispatch = useDispatch();
 
@@ -54,7 +54,7 @@ export default function MovieDetail() {
   return (
     <>
       {isLoading ? (
-        <Loading />
+       <LoadingPageV0/>
       ) : (
         <div>
           <S.BackDrop

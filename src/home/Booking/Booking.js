@@ -5,12 +5,12 @@ import _ from "lodash";
 import { StyledBooking } from "./BookingElements";
 import { Form, Input } from "antd";
 import { BookingModel } from "../../models/models";
-import Loading from "../../components/Loading/Loading";
 import GridSeat from "./GridSeat";
 import { useNavigate, useParams } from "react-router-dom";
 import { Container } from "../../styles/Styles";
 import { SweetAlertWarning } from "../../models/models";
 import Swal from "sweetalert2";
+import { LoadingPageV0 } from "../../components/Loading/Loading";
 
 const alertWarning = new SweetAlertWarning();
 
@@ -19,7 +19,7 @@ export default function Booking() {
     (state) => state.CinemaReducer
   );
 
-  const { isLoading } = useSelector((state) => state.LoadingReducer);
+   const isLoading = useSelector((state) => state.LoadingReducer.isLoading);
   const { userLogin } = useSelector((state) => state.UserReducer);
 
   const dispatch = useDispatch();
@@ -117,23 +117,25 @@ export default function Booking() {
   );
 
   return (
-    <Container>
+    <>
       {isLoading ? (
-        <Loading />
+        <LoadingPageV0 />
       ) : (
-        <StyledBooking>
-          <section className="grid">
-            <GridSeat
-              movieShowtime={movieShowtime}
-              seat={seat}
-              seatIsBooking={seatIsBooking}
-              userLogin={userLogin}
-            />
-            {renderSideBar()}
-          </section>
-          {renderGetTicketFixed()}
-        </StyledBooking>
+       <Container>
+          <StyledBooking>
+            <section className="grid">
+              <GridSeat
+                movieShowtime={movieShowtime}
+                seat={seat}
+                seatIsBooking={seatIsBooking}
+                userLogin={userLogin}
+              />
+              {renderSideBar()}
+            </section>
+            {renderGetTicketFixed()}
+          </StyledBooking>
+       </Container>
       )}
-    </Container>
+    </>
   );
 }

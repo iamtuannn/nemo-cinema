@@ -2,14 +2,22 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NEMO } from "../../utils/config";
 import { getMoviesListAction } from "../../redux/actions";
-import { Heading, Container } from "../../styles/Styles";
-import { MovieGridV1, MovieGridV2 } from "../../components/MovieGrid/MovieGrid";
+import {
+  Heading,
+  Container,
+  GridCardV1,
+  GridCardV2,
+} from "../../styles/Styles";
 import { MovieCardV1 } from "../../components/MovieCard/V1/MovieCardV1";
 import { MovieCardV2 } from "../../components/MovieCard/V2/MovieCardV2";
-import Loading from "../../components/Loading/Loading";
+import {
+  LoadingPageV1,
+  LoadingPageV2,
+} from "../../components/Loading/Loading";
+
 export default function NowShowing() {
   const movies = useSelector((state) => state.MovieReducer.nowShowing);
-  const { isLoading } = useSelector((state) => state.LoadingReducer);
+   const isLoading = useSelector((state) => state.LoadingReducer.isLoading);
 
   const dispatch = useDispatch();
 
@@ -20,22 +28,24 @@ export default function NowShowing() {
 
   return (
     <Container>
+      <Heading>Now Showing</Heading>
       {isLoading ? (
-        <Loading />
+        <LoadingPageV2 />
       ) : (
-        <>
-          <Heading>Now Showing</Heading>
-          <MovieGridV1>
-            {movies.map((movie, index) => (
-              <MovieCardV1 movie={movie} key={index} />
-            ))}
-          </MovieGridV1>
-          <MovieGridV2>
-            {movies.map((movie, index) => (
-              <MovieCardV2 movie={movie} key={index} />
-            ))}
-          </MovieGridV2>
-        </>
+        <GridCardV1>
+          {movies.map((movie, index) => (
+            <MovieCardV1 movie={movie} key={index} />
+          ))}
+        </GridCardV1>
+      )}
+      {isLoading ? (
+        <LoadingPageV1 />
+      ) : (
+        <GridCardV2>
+          {movies.map((movie, index) => (
+            <MovieCardV2 movie={movie} key={index} />
+          ))}
+        </GridCardV2>
       )}
     </Container>
   );

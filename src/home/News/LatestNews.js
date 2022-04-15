@@ -5,18 +5,18 @@ import { getNewsListAction } from "../../redux/actions";
 import { Heading, Container } from "../../styles/Styles";
 import { NewsCardV1 } from "../../components/NewsCard/NewsCardV1";
 import { NewsCardV2 } from "../../components/NewsCard/NewsCardV2";
-import Loading from "../../components/Loading/Loading";
-import { LoadingCardV1 } from "../../components/Loading/LoadingCard";
+import { LoadingPageV1 } from "../../components/Loading/Loading";
 
 export default function LatestNews() {
+  document.title = `Latest News - ${NEMO}`;
+
   const news = useSelector((state) => state.NewsReducer.newsList);
-  const { isLoading } = useSelector((state) => state.LoadingReducer);
+  const isLoading = useSelector((state) => state.LoadingReducer.isLoading);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getNewsListAction());
-    document.title = `Latest News - ${NEMO}`;
   }, [dispatch]);
 
   const [windowDimension, setWindowDimension] = useState(null);
@@ -40,14 +40,7 @@ export default function LatestNews() {
     <Container>
       <Heading>Latest News</Heading>
       {isLoading ? (
-        <>
-          <LoadingCardV1 />
-          <LoadingCardV1 />
-          <LoadingCardV1 />
-          <LoadingCardV1 />
-          <LoadingCardV1 />
-          <LoadingCardV1 />
-        </>
+        <LoadingPageV1 grid />
       ) : (
         <>
           {news.map((news, index) => (

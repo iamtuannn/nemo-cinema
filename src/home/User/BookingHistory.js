@@ -7,12 +7,14 @@ import styled from "styled-components";
 import { Container, Heading } from "../../styles/Styles";
 import bg from "../../images/bg.jpg";
 import moment from "moment";
+import { LoadingPageV0} from "../../components/Loading/Loading";
 
 export default function BookingHistory() {
   document.title = `Booking History - ${NEMO}`;
   const dispatch = useDispatch();
 
   const ticket = useSelector((state) => state.UserReducer.ticket);
+  const isLoading = useSelector((state) => state.LoadingReducer.isLoading);
 
   let userLogin = localStorage.getItem(USER_LOGIN)
     ? JSON.parse(localStorage.getItem(USER_LOGIN))
@@ -28,29 +30,33 @@ export default function BookingHistory() {
 
   return (
     <S.Background>
-      <S.Box>
-        <Container>
-          <Heading>Booking History</Heading>
-          <S.Grid>
-            {ticket.map((ticket) => (
-              <S.Card key={ticket.maVe}>
-                <div>
-                  <S.MovieName>{ticket.tenPhim}</S.MovieName>
-                  <S.Text>
-                    {ticket.danhSachGhe[0].tenHeThongRap} |{" "}
-                    {moment(ticket.ngayDat).format("lll")}
-                  </S.Text>
-                </div>
-                <S.Flex>
-                  {ticket.danhSachGhe.map((seat, index) => (
-                    <S.Text key={index}>[{seat.tenGhe}]</S.Text>
-                  ))}
-                </S.Flex>
-              </S.Card>
-            ))}
-          </S.Grid>
-        </Container>
-      </S.Box>
+      {isLoading ? (
+        <LoadingPageV0 />
+      ) : (
+        <S.Box>
+          <Container>
+            <Heading>Booking History</Heading>
+            <S.Grid>
+              {ticket.map((ticket) => (
+                <S.Card key={ticket.maVe}>
+                  <div>
+                    <S.MovieName>{ticket.tenPhim}</S.MovieName>
+                    <S.Text>
+                      {ticket.danhSachGhe[0].tenHeThongRap} |{" "}
+                      {moment(ticket.ngayDat).format("lll")}
+                    </S.Text>
+                  </div>
+                  <S.Flex>
+                    {ticket.danhSachGhe.map((seat, index) => (
+                      <S.Text key={index}>[{seat.tenGhe}]</S.Text>
+                    ))}
+                  </S.Flex>
+                </S.Card>
+              ))}
+            </S.Grid>
+          </Container>
+        </S.Box>
+      )}
     </S.Background>
   );
 }
@@ -69,6 +75,7 @@ const S = {
     width: 100%;
     height: 100%;
     z-index: 2;
+    animation: fade-in 1s ease-in-out 0s both;
   `,
   Grid: styled.div`
     display: grid;
