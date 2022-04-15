@@ -1,7 +1,9 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Footer from "./components/Footer/Footer";
+import ModalVideoPlayTrailer from "./components/ModalVideo/ModalVideo";
 import Admin from "./routers/Admin";
 import Home from "./routers/Home";
+
 
 function App() {
   return (
@@ -11,6 +13,7 @@ function App() {
         <Route path="admin/*" element={<Admin />} />
       </Routes>
       <Footer/>
+      <ModalVideoPlayTrailer/>
     </BrowserRouter>
   );
 }
