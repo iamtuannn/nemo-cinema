@@ -26,7 +26,6 @@ const NewsCard = {
   MB: styled.div`
     margin-bottom: 1rem;
     border-radius: 0.5rem;
-    background: var(--color-secondary);
     overflow: hidden;
     animation: fade-in 1s ease-in-out 0s;
 
