@@ -78,6 +78,7 @@ const S = {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 1rem;
+    margin-bottom: 1rem;
 
     ${Breakpoints.lg} {
       grid-template-columns: repeat(2, minmax(0, 1fr));
