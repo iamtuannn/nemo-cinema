@@ -70,6 +70,8 @@ export const StyledButton = styled.button`
   overflow: hidden;
   z-index: 1;
   position: relative;
+  left: 50%;
+  transform: translateX(-50%);
   min-width: 100px;
 
   ::after {

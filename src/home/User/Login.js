@@ -57,9 +57,7 @@ export default function Login() {
             Don't have an account yet? <Link to="/signup">Sign Up Now</Link>
           </S.Text>
         </S.Center>
-        <S.Center>
-          <StyledButton type="submit">Log In</StyledButton>
-        </S.Center>
+        <StyledButton type="submit">Log In</StyledButton>
       </S.Form>
     </S.Box>
   );

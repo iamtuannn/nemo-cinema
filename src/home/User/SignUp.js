@@ -170,9 +170,7 @@ export default function SignUp() {
         >
           <Input onChange={formik.handleChange} />
         </AntDesignFormItem>
-        <S.Center>
-          <StyledButton type="submit">Sign Up</StyledButton>
-        </S.Center>
+        <StyledButton type="submit">Sign Up</StyledButton>
       </S.Form>
     </S.Box>
   );
