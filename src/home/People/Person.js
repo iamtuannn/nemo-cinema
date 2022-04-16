@@ -205,7 +205,7 @@ const Bio = {
   Name: styled.h2`
     font-size: 2.9rem;
     font-weight: 600;
-    font-family: Khand;
+    font-family: Khand, sans-serif;
     display: block;
     color: var(--text-light);
 
@@ -236,7 +236,7 @@ const Info = {
   Name: styled.h2`
     font-size: 2.9rem;
     font-weight: 600;
-    font-family: Khand;
+    font-family: Khand, sans-serif;
     display: none;
     color: var(--text-light);
     text-align: center;

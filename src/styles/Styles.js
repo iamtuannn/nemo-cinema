@@ -35,7 +35,7 @@ export const SectionTitle = styled.h3`
   display: block;
   position: relative;
   line-height: 1.3;
-  font-family: Khand;
+  font-family: Khand, sans-serif;
   font-size: 1.5rem;
   font-weight: 600;
   color: #fff;

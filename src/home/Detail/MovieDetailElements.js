@@ -207,7 +207,7 @@ export const InfoContent = styled.div`
 export const Name = styled.h2`
   font-size: calc(1.8rem + 2vw);
   font-weight: 600;
-  font-family: Khand;
+  font-family: Khand, sans-serif;
   margin-bottom: 0;
   text-align: center;
   color: var(--text-light);
@@ -307,7 +307,7 @@ export const ButtonTrailer = styled.button`
 
 export const PlayTrailer = styled.span`
   font-weight: 600;
-  font-family: Khand;
+  font-family: Khand, sans-serif;
 `;
 
 export const Cast = styled.div`
@@ -371,7 +371,7 @@ export const Showtime = styled.div`
 `;
 
 export const NoShowtime = styled.p`
-  font-family: Khand;
+  font-family: Khand, sans-serif;
   font-size: 1.25rem;
   text-align: center;
   margin: 1rem 0;
@@ -423,7 +423,7 @@ export const Checkout = styled.div`
 export const ShowtimeLink = styled.button`
   position: relative;
   z-index: 1;
-  font-family: Khand;
+  font-family: Khand, sans-serif;
   font-size: 1.25rem;
   background-color: transparent;
   border: none;

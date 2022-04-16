@@ -71,7 +71,7 @@ const S = {
   Name: styled.h4`
     font-size: calc(1.8rem + 0.5vw);
     font-weight: 600;
-    font-family: Khand;
+    font-family: Khand, sans-serif;
     margin-bottom: 0;
   `,
   Tagline: styled.p`
@@ -101,7 +101,7 @@ const S = {
   `,
   PlayTrailer: styled.span`
     font-weight: 600;
-    font-family: Khand;
+    font-family: Khand, sans-serif;
     font-size: 20px;
   `,
   Slider: styled(Slider)`
