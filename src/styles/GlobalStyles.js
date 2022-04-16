@@ -45,6 +45,10 @@ export const GlobalStyles = createGlobalStyle`
         user-select: none;
     }
 
+    .swal2-timer-progress-bar {
+        background: var(--color-red);
+    }
+
     h1, h2, h3, h4{
         margin-bottom: 0;
         color: var(--text-light);

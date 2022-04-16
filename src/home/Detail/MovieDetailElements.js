@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const BackDrop = styled.div`
@@ -416,19 +415,20 @@ export const CinemaShowtime = styled.div`
   gap: 0.5rem;
 `;
 
-export const Checkout = styled(Link)`
+export const Checkout = styled.div`
   grid-column: span 1 / span 1;
   text-align: center;
-  &:hover {
-    color: #fff;
-  }
 `;
 
-export const ShowtimeLink = styled.span`
+export const ShowtimeLink = styled.button`
   position: relative;
   z-index: 1;
   font-family: Khand;
   font-size: 1.25rem;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+
   &::before {
     content: "";
     position: absolute;
@@ -441,10 +441,10 @@ export const ShowtimeLink = styled.span`
     transform-origin: center right;
     transform: scaleX(0);
     transition: transform 0.2s ease-in-out;
+  }
 
-    ${Checkout}:hover & {
-      transform: scaleX(1);
-      transform-origin: center left;
-    }
+  :hover::before {
+    transform: scaleX(1);
+    transform-origin: center left;
   }
 `;

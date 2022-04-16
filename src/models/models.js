@@ -81,8 +81,11 @@ class SweetAlert {
   title = "Successful";
   text = "";
   showConfirmButton = false;
+  confirmButtonText = "Yes";
+  confirmButtonColor = "var(--color-red)";
   showCancelButton = false;
   timer = 2000;
+  timerProgressBar = false;
 }
 export class SweetAlertFailure extends SweetAlert {
   icon = "error";
@@ -95,8 +98,7 @@ export class SweetAlertSuccessful extends SweetAlert {
 
 export class SweetAlertWarning extends SweetAlert {
   icon = "warning";
-  title = "Warning";
-  text = "You must login to continue";
+  title = "You must login to continue";
 }
 
 export class SweetAlertQuestion extends SweetAlert {
