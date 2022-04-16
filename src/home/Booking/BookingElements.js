@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const StyledBooking = styled.div`
   h2.title {
     font-weight: 600;
-    font-family: Khand;
+    font-family: Khand, sans-serif;
     text-align: center;
     color: var(--color-red);
     font-size: 1.6rem;
@@ -27,7 +27,6 @@ export const StyledBooking = styled.div`
   }
 
   h4 {
-    font-family: Arial, Helvetica, sans-serif;
     text-align: center;
     font-size: 1.2rem;
     font-weight: 600;
@@ -39,7 +38,6 @@ export const StyledBooking = styled.div`
 
   p {
     text-align: center;
-    font-family: Arial, Helvetica, sans-serif;
   }
 
   div.flex {
@@ -216,6 +214,8 @@ export const StyledBooking = styled.div`
     }
 
     div.user-info {
+      margin-top: 2rem;
+
       label {
         color: white;
         min-width: 50px;
@@ -322,7 +322,7 @@ export const StyledBooking = styled.div`
     div.money {
       width: 50%;
       height: 100%;
-      background: rgba(255, 255, 255, 0.2);
+      background: #715d70ed;
       backdrop-filter: blur(8px);
       p {
         font-family: "Khand", sans-serif;

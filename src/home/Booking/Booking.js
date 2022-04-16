@@ -55,7 +55,7 @@ export default function Booking() {
         {movieShowtime.tenRap}
       </p>
       <div className="user-info">
-        <h4>User</h4>
+        <h4>User Information</h4>
         <Form>
           <Form.Item label="Name">
             <Input value={userLogin.hoTen} disabled />
@@ -78,7 +78,6 @@ export default function Booking() {
             .toLocaleString()}{" "}
         </p>
       </div>
-      <h4>Seats</h4>
       <div className="seats">
         {_.sortBy(seatIsBooking, ["maGhe"]).map((seat, index) => (
           <span className="pending" key={index}>

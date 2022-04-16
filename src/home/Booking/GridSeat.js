@@ -15,7 +15,6 @@ export default function GridSeat({
   const navigate = useNavigate();
   const [count, setCount] = useState(300);
 
-
   let intervalRef = useRef(0);
   useEffect(() => {
     intervalRef.current = setInterval((prev) => {
@@ -128,7 +127,7 @@ export default function GridSeat({
   );
 
   return (
-    <div>
+    <div style={{ overflowX: "hidden" }}>
       {renderHeader()}
       <section className="screen">
         <div className="borderScreen"></div>

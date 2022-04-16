@@ -76,7 +76,7 @@ export const RegisterAction = (userInfo, navigate) => {
 export const getAccountInfoAction = (account) => {
   return async (dispatch) => {
     try {
-      dispatch(showLoadingAction)
+      dispatch(showLoadingAction);
 
       const result = await cyberSoftServices.post(
         `api/QuanLyNguoiDung/ThongTinTaiKhoan`,
@@ -89,9 +89,9 @@ export const getAccountInfoAction = (account) => {
         ticket: result.data.thongTinDatVe.reverse(),
       });
 
-      dispatch(hideLoadingAction)
+      dispatch(hideLoadingAction);
     } catch (error) {
-      dispatch(hideLoadingAction)
+      dispatch(hideLoadingAction);
       console.log("error", error.response);
     }
   };
@@ -174,6 +174,8 @@ export const getMovieDetailAction = (id) => {
       let tmdb = await cyberSoftServices.getTMDB(
         `movie/${obj.tmdb}?api_key=${TMDB_KEY}&language=en-US`
       );
+
+      document.title = `${tmdb.data.title} - ${NEMO}`
 
       let cybersoft = await cyberSoftServices.get(
         `api/QuanLyRap/LayThongTinLichChieuPhim?MaPhim=${obj.maPhim}`
@@ -269,10 +271,10 @@ export const getActorList = (page, navigate) => async (dispatch) => {
       actor: actor.data.results,
       totalPages: actor.data.total_pages,
     });
-    
+
     dispatch(hideLoadingAction);
   } catch (error) {
-    navigate("/people")
+    navigate("/people");
     dispatch(hideLoadingAction);
     console.log("error: ", error.response?.data);
   }
@@ -305,7 +307,7 @@ export const getPersonAction = (id, nameUrl, navigate) => {
 
       document.title = `${person.data.name} - ${NEMO}`;
 
-      dispatch(hideLoadingAction)
+      dispatch(hideLoadingAction);
     } catch (error) {
       dispatch(hideLoadingAction);
       console.log("error: ", error.response?.data);
@@ -316,16 +318,28 @@ export const getPersonAction = (id, nameUrl, navigate) => {
 export const getMovieShowTimesAction = (id, navigate) => {
   return async (dispatch) => {
     try {
-      if (!localStorage.getItem(USER_LOGIN)) {
-        Swal.fire({ ...alertWarning, didDestroy: () => navigate("/") });
-      }
-
       dispatch(showLoadingAction);
+
+      if (!localStorage.getItem(USER_LOGIN)) {
+        alertWarning.showConfirmButton = true;
+        alertWarning.confirmButtonText = "Login";
+        alertWarning.showCancelButton = true;
+        alertWarning.timer = "3000";
+        alertWarning.timerProgressBar = "true";
+        return Swal.fire({ ...alertWarning }).then((result) => {
+          window.scroll(0, 0);
+          if (result.isConfirmed) {
+            navigate("/login");
+          }
+
+          navigate("/");
+        });
+      }
 
       const result = await cyberSoftServices.get(
         `api/QuanLyDatVe/LayDanhSachPhongVe?MaLichChieu=${id}`
       );
-      document.title = `${result.data.thongTinPhim.tenPhim} - ${NEMO}`;
+      document.title = `Booking Ticket -${result.data.thongTinPhim.tenPhim} - ${NEMO}`;
 
       if (result.status === 200) {
         dispatch({
