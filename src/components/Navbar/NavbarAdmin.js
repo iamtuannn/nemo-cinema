@@ -14,7 +14,11 @@ export default function NavbarAdmin() {
         <Dropdown.Block>{el.type}</Dropdown.Block>
         <Dropdown.Content className="dropdown-content">
           {el.link.map((el) => (
-            <Dropdown.Link key={el.name} to={el.path} onClick={()=> setShowBar(false)}>
+            <Dropdown.Link
+              key={el.name}
+              to={el.path}
+              onClick={() => setShowBar(false)}
+            >
               {el.name}
             </Dropdown.Link>
           ))}
@@ -39,10 +43,10 @@ export default function NavbarAdmin() {
   );
 
   return (
-    <Nav.Box>
+    <Nav.Box backgroundColor={showBar ? "var(--color-nav)" : "transparent"}>
       <Nav.Wrapper>
         <Nav.LogoBar>
-          <Link to="/" onClick={()=> setShowBar(false)}>
+          <Link to="/" onClick={() => setShowBar(false)}>
             <Nav.Logo className="logo">Nemo cinema</Nav.Logo>
           </Link>
           <Nav.Icon onClick={() => setShowBar(!showBar)}>
@@ -57,8 +61,9 @@ export default function NavbarAdmin() {
 
 const Nav = {
   Box: styled.header`
-    background-color: var(--color-nav);
+    background-color: ${props => props.backgroundColor};
     padding: 0.5rem 1rem;
+    transition: all 0.5s ease-in-out 0.25s;
 
     @media (max-width: 900px) {
       padding: 0.5rem 0;
@@ -96,8 +101,12 @@ const Nav = {
     font-size: 2.5rem;
     font-family: "Khand", sans-serif;
     text-transform: uppercase;
-    color: var(--color-red);
+    color: var(--text-light);
     font-weight: 700;
+
+    @media (max-width: 400px) {
+      font-size: 1.8rem;
+    }
   `,
 
   Icon: styled.div`
@@ -169,8 +178,8 @@ const Dropdown = {
     user-select: none;
     margin: 0 0.5rem;
     transition: all 0.5s ease-in-out;
-    background-color: var(--rgba-blue-magenta);
     border-radius: 4px;
+    background-color: var(--light-red);
 
     :hover .dropdown-content {
       display: block;
@@ -191,9 +200,10 @@ const Dropdown = {
     cursor: pointer;
     width: 100%;
     border-radius: 4px;
-    text-transform: uppercase;
+    text-transform: capitalize;
     transition: all 0.5s ease-in-out;
     font-family: "Khand", sans-serif;
+    color: var(--dark);
 
     :hover {
       /* background-color: var(--color-nav); */
@@ -206,8 +216,8 @@ const Dropdown = {
   Content: styled.div`
     display: none;
     position: absolute;
-    background-color: var(--color-red);
-    box-shadow: var(--shadow-dark);
+    background-color: var(--light-red);
+    box-shadow: var(--shadow-light);
     z-index: 100;
     border-radius: 8px;
     width: max-content;
@@ -241,7 +251,7 @@ const Dropdown = {
     text-align: center;
     border-bottom: 1px solid var(--light);
 
-    :last-child{
+    :last-child {
       border-bottom: none;
     }
 

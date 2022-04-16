@@ -7,7 +7,7 @@ export const AntDesignTable = styled(Table)`
   margin: 0 auto;
 
   .ant-table-tbody > tr.ant-table-row > td {
-    background: var(--lumber);
+    background: var(--color-lumber);
     color: var(--dark);
     font-size: 1.3rem;
 
@@ -26,7 +26,7 @@ export const AntDesignTable = styled(Table)`
   }
 
   .ant-table-thead tr th {
-    background: var(--primary);
+    background: var(--color-primary);
     color: var(--light);
     font-size: 1.5rem;
     font-family: "Khand", sans-serif;
@@ -41,6 +41,10 @@ export const AntDesignTable = styled(Table)`
     }
   }
 
+  .ant-dropdown-menu-title-content {
+    color: var(--dark);
+  }
+
   .ant-table-tbody > tr.ant-table-row:hover > td {
     background: var(--light-red);
     color: var(--dark);
@@ -53,16 +57,16 @@ export const AntDesignTable = styled(Table)`
   }
 
   .anticon > svg {
-    color: var(--red);
+    color: var(--color-red);
   }
 
   .ant-checkbox-checked.ant-checkbox-inner {
-    background-color: var(--primary);
-    border-color: var(--primary);
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
   }
 
   .ant-dropdown-menu-item-selected {
-    color: var(--primary);
+    color: var(--color-primary);
   }
 `;
 

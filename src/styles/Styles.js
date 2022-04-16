@@ -19,7 +19,7 @@ export const Heading = styled.h2`
   font-family: "Khand", sans-serif;
   text-align: center;
   text-transform: uppercase;
-  color: var(--color-red);
+  color: ${props => props.admin ? "var(--text-light)" : "var(--color-red)"};
   padding-bottom: 1rem;
 
   ${Breakpoints.lg} {

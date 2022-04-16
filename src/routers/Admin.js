@@ -15,6 +15,9 @@ import { USER_LOGIN } from "../utils/config";
 export default function Admin() {
   const user = JSON.parse(localStorage.getItem("USER_LOGIN")) || "";
 
+  document.body.style.background =
+    "linear-gradient(to right top,#7e79a8,#736f9e,#686694,#5d5c8b,#525381,#544f7f,#574c7d,#5a487a,#6c487c,#7e487b,#8e4778,#9e4773)";
+
   if (!localStorage.getItem(USER_LOGIN)) {
     return <Navigate to="/" />;
   }

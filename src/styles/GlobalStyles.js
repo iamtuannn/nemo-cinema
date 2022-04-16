@@ -9,26 +9,29 @@ export const GlobalStyles = createGlobalStyle`
         --color-nav: rgba(33, 33, 33, 0.98);
         --color-footer: rgba(19, 18, 20, 0.98);
         --color-red: #ca4242;
+        --light-red: #dea3a3;
+        --blue-magenta: #483f5e;
         --vampire-black: #080808;
         --rgba-blue-magenta: rgba(66, 63, 87, 0.8);
         --border: 1px solid hsl(0, 0%, 18.82%);
         --color-magenta: #715d70;
         --text-light: hsla(0, 100%, 100%, 0.88);
         --light: hsla(0, 100%, 100%, 0.88);
+        --dark: hsla(248, 14%, 11%, 0.88);
         --shadow-light: 0 4px 8px 0 #ffffff4d;
         --shadow-black: 0 4px 8px 0 #00000040;
         --dark-gray:#696969 ;
         --dark-blue: #4b4762;
         --dark-pink: #713758;
+        --color-lumber: #FFDFD3;
     }
 
-    body {
+    html, body {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        background-color: #191820;
         font-size: 16px;
-        min-height: 100vh;
+        height: inherit;
         color: var(--text-light);
         font-family: 'Khand', sans-serif;
     }

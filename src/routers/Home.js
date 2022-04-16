@@ -16,6 +16,7 @@ import BookingHistory from "../home/User/BookingHistory";
 import UserInfo from "../home/User/UserInfo";
 
 export default function Home() {
+  document.body.style.background = "#191820"
   return (
     <>
       <NavbarHome />
