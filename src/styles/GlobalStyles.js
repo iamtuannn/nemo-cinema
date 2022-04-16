@@ -49,6 +49,11 @@ export const GlobalStyles = createGlobalStyle`
         background: var(--color-red);
     }
 
+    .swal2-popup{
+        width: 30rem;
+        max-width: 90%;
+    }
+
     h1, h2, h3, h4{
         margin-bottom: 0;
         color: var(--text-light);
