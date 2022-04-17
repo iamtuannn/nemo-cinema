@@ -16,8 +16,8 @@ import {
   USER_LOGIN,
 } from "../utils/config";
 
-const alertUserSuccess = new SweetAlertSuccessful();
-const alertUserFailure = new SweetAlertFailure();
+const alertSuccess = new SweetAlertSuccessful();
+const alertFailure = new SweetAlertFailure();
 const alertWarning = new SweetAlertWarning();
 
 export const LoginAction = (userInfo, navigate) => {
@@ -34,13 +34,13 @@ export const LoginAction = (userInfo, navigate) => {
       });
 
       Swal.fire({
-        ...alertUserSuccess,
+        ...alertSuccess,
         didDestroy: () => navigate("/"),
       });
     } catch (errors) {
-      alertUserFailure.title = "Login Failed";
-      alertUserFailure.text = "User Name or Your Password are not correct!";
-      Swal.fire({ ...alertUserFailure });
+      alertFailure.title = "Login Failed";
+      alertFailure.text = "User Name or Your Password are not correct!";
+      Swal.fire({ ...alertFailure });
       console.log("errors", errors.response);
     }
   };
@@ -51,23 +51,23 @@ export const RegisterAction = (userInfo, navigate) => {
     try {
       await cyberSoftServices.post(`api/QuanLyNguoiDung/DangKy`, userInfo);
 
-      alertUserSuccess.title = "Successful Registration";
+      alertSuccess.title = "Successful Registration";
       Swal.fire({
-        ...alertUserSuccess,
+        ...alertSuccess,
         didDestroy: () => navigate("/login"),
       });
     } catch (errors) {
-      alertUserFailure.title = "Register Fail";
+      alertFailure.title = "Register Fail";
 
       if (errors.response.data === "Email đã tồn tại!") {
-        alertUserFailure.text = "Email already exists!";
+        alertFailure.text = "Email already exists!";
       }
 
       if (errors.response.data === "Tài khoản đã tồn tại!") {
-        alertUserFailure.text = "Account already exists!";
+        alertFailure.text = "Account already exists!";
       }
 
-      Swal.fire({ ...alertUserFailure });
+      Swal.fire({ ...alertFailure });
       console.log("errors", errors.response);
     }
   };
@@ -104,7 +104,7 @@ export const putUpdateUserAction = (userUpdate) => {
         .put(`api/QuanLyNguoiDung/CapNhatThongTinNguoiDung`, userUpdate)
         .then(() => {
           Swal.fire({
-            ...alertUserSuccess,
+            ...alertSuccess,
             didDestroy: () => {
               dispatch(getAccountInfoAction());
               localStorage.setItem(USER_LOGIN, JSON.stringify(userUpdate));
@@ -116,9 +116,9 @@ export const putUpdateUserAction = (userUpdate) => {
           throw errors;
         });
     } catch (errors) {
-      alertUserFailure.title = "Update Failed";
-      alertUserFailure.text = `${errors.response?.data}`;
-      Swal.fire({ ...alertUserFailure });
+      alertFailure.title = "Update Failed";
+      alertFailure.text = `${errors.response?.data}`;
+      Swal.fire({ ...alertFailure });
       console.log(errors);
     }
   };
@@ -175,7 +175,7 @@ export const getMovieDetailAction = (id) => {
         `movie/${obj.tmdb}?api_key=${TMDB_KEY}&language=en-US`
       );
 
-      document.title = `${tmdb.data.title} - ${NEMO}`
+      document.title = `${tmdb.data.title} - ${NEMO}`;
 
       let cybersoft = await cyberSoftServices.get(
         `api/QuanLyRap/LayThongTinLichChieuPhim?MaPhim=${obj.maPhim}`
@@ -361,21 +361,47 @@ export const BookingAction = (bookingInfo, navigate) => {
   return async () => {
     try {
       await cyberSoftServices.post(`api/QuanLyDatVe/DatVe`, bookingInfo);
-      alertUserSuccess.title = "Successfully Booked";
-      alertUserSuccess.text = "Enjoy your movie!";
+      alertSuccess.title = "Successfully Booked";
+      alertSuccess.text = "Enjoy your movie!";
       Swal.fire({
-        ...alertUserSuccess,
+        ...alertSuccess,
         didDestroy: () => {
           navigate("/history");
         },
       });
     } catch (error) {
-      alertUserFailure.title = "Book Failed";
-      alertUserFailure.text = `${error.response?.data}`;
+      alertFailure.title = "Book Failed";
+      alertFailure.text = `${error.response?.data}`;
       Swal.fire({
-        ...alertUserFailure,
+        ...alertFailure,
       });
       console.log(error);
+    }
+  };
+};
+
+//ADMIN
+
+export const deleteMovieAction = (id) => {
+  return async (dispatch) => {
+    try {
+      await cyberSoftServices.delete(`api/QuanLyPhim/XoaPhim?MaPhim=${id}`);
+
+      Swal.fire({
+        ...alertSuccess,
+        didDestroy: () => {
+          dispatch(getMoviesListAction());
+        },
+      });
+    } catch (errors) {
+      alertFailure.title = "Delete Failed";
+      alertFailure.text = `${errors.response?.data}`;
+      Swal.fire({
+        ...alertFailure,
+        didDestroy: () => {
+          dispatch(getMoviesListAction());
+        },
+      });
     }
   };
 };

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Form, Table, Tabs } from "antd";
+import { Form, Input, Table, Tabs } from "antd";
 import { Breakpoints } from "./Breakpoints";
 
 export const AntDesignTable = styled(Table)`
@@ -120,5 +120,19 @@ export const AntDesignTab = styled(Tabs)`
         padding: 0 16px;
       }
     }
+  }
+`;
+
+export const AntDesignSearch = styled(Input.Search)`
+  margin-bottom: 1rem;
+
+  .ant-btn-primary {
+    border-color: var(--blue-magenta);
+    background: var(--blue-magenta);
+  }
+
+  .ant-btn-primary:hover {
+    border-color: var(--blue-magenta);
+    background: var(--blue-magenta);
   }
 `;
