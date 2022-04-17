@@ -24,6 +24,7 @@ export default function ManageMovies() {
 
   useEffect(() => {
     dispatch(getMoviesListAction());
+    window.scroll(0, 0);
   }, [dispatch]);
 
   const columns = [
@@ -94,18 +95,22 @@ export default function ManageMovies() {
           <>
             <Link
               key={1}
-              className=" mr-2 text-2xl"
               to={`/admin/movie/edit/${movie.maPhim}`}
               onClick={() => {
                 localStorage.setItem("movieParams", JSON.stringify(movie));
               }}
             >
-              <AiOutlineEdit style={{ color: "#3b586f", fontSize: "1.5rem" }} />{" "}
+              <AiOutlineEdit
+                style={{
+                  color: "#3b586f",
+                  fontSize: "1.5rem",
+                  marginRight: "0.25rem",
+                }}
+              />{" "}
             </Link>
             <span
               style={{ cursor: "pointer" }}
               key={2}
-              className="text-2xl"
               onClick={() => {
                 alertWarning.title = `Do you want to delete ${movie.tenPhim}`;
                 alertWarning.showConfirmButton = true;
@@ -122,13 +127,16 @@ export default function ManageMovies() {
               }}
             >
               <AiOutlineDelete
-                style={{ color: "#ff5757", fontSize: "1.5rem" }}
+                style={{
+                  color: "#ff5757",
+                  fontSize: "1.5rem",
+                  marginRight: "0.25rem",
+                }}
               />
             </span>
 
             <Link
               key={3}
-              className=" mr-2 text-2xl"
               to={`/movie/showtime/${movie.maPhim}`}
               onClick={() => {
                 localStorage.setItem("movieParams", JSON.stringify(movie));

@@ -210,7 +210,7 @@ export const getMovieDetailAction = (id, navigate) => {
       dispatch(hideLoadingAction);
     } catch (error) {
       dispatch(hideLoadingAction);
-      navigate("/")
+      navigate("/");
       console.log("error: ", error);
     }
   };
@@ -407,7 +407,6 @@ export const deleteMovieAction = (id) => {
   };
 };
 
-
 export const postNewMovieAction = (formData, navigate) => async (dispatch) => {
   try {
     await cyberSoftServices.post(`api/QuanLyPhim/ThemPhimUploadHinh`, formData);
@@ -426,5 +425,48 @@ export const postNewMovieAction = (formData, navigate) => async (dispatch) => {
       ...alertFailure,
     });
     console.log(error);
+  }
+};
+
+export const postUpdateMovieAction =
+  (formData, navigate) => async (dispatch) => {
+    try {
+      await cyberSoftServices.post(
+        `api/QuanLyPhim/CapNhatPhimUpload`,
+        formData
+      );
+
+      Swal.fire({
+        ...alertSuccess,
+        didDestroy: () => {
+          dispatch(getMoviesListAction());
+          navigate("/admin/movie");
+        },
+      });
+    } catch (error) {
+      alertFailure.title = "Edit Failed";
+      alertFailure.text = `${error.response?.data}`;
+      Swal.fire({
+        ...alertFailure,
+      });
+      console.log(error);
+    }
+  };
+
+export const getMovieByID = (id, navigate) => async (dispatch) => {
+  try {
+    const result = await cyberSoftServices.get(
+      `api/QuanLyPhim/LayThongTinPhim?MaPhim=${id}`
+    );
+
+    document.title = `Edit Movie - ${result.data.tenPhim} - ${NEMO}`;
+
+    dispatch({
+      type: "GET_MOVIE_EDIT",
+      movieEdit: result.data,
+    });
+  } catch (error) {
+    navigate("/admin/movie");
+    console.error(error);
   }
 };

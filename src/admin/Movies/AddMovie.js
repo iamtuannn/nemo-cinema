@@ -14,6 +14,8 @@ export default function AddMovie() {
   document.title = `Add Movie - ${NEMO}`;
 
   const [imgSrc, setImgSrc] = useState("");
+  const dateFormat = "DD/MM/YYYY";
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -67,9 +69,9 @@ export default function AddMovie() {
   };
 
   const handleChangeDatePicker = (value) => {
-    let ngayKhoiChieu = moment(value).format("DD/MM/YYYY");
+    let ngayKhoiChieu = moment(value).format(dateFormat);
     formik.setFieldValue("ngayKhoiChieu", ngayKhoiChieu);
-  };
+  }; 
 
   return (
     <Container>
@@ -110,7 +112,7 @@ export default function AddMovie() {
           ) : null}
         </AntDesignFormItem>
         <AntDesignFormItem label="Release Date">
-          <DatePicker onChange={handleChangeDatePicker} />
+          <DatePicker onChange={handleChangeDatePicker} format={dateFormat}/>
           {formik.touched.ngayKhoiChieu && formik.errors.ngayKhoiChieu ? (
             <div>{formik.errors.ngayKhoiChieu}</div>
           ) : null}

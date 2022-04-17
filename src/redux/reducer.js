@@ -1,7 +1,7 @@
 import { applyMiddleware, combineReducers, createStore } from "redux";
 import thunk from "redux-thunk";
 import { MovieModel, NewsModel, PersonModel } from "../models/models";
-import { TOKEN, USER_LOGIN } from "../utils/config";
+import { GROUPID, TOKEN, USER_LOGIN } from "../utils/config";
 
 let user = {};
 
@@ -50,6 +50,15 @@ const MovieReducer = (
     comingSoon: [],
     nowShowing: [],
     movieList: [],
+    movieEdit: {
+      maPhim: "",
+      tenPhim: "",
+      trailer: "",
+      hinhAnh: "",
+      moTa: "",
+      maNhom: GROUPID,
+      ngayKhoiChieu: "",
+    },
   },
   action
 ) => {
@@ -67,6 +76,11 @@ const MovieReducer = (
 
     case "GET_MOVIE_DETAIL": {
       state.movie = action.movie;
+      return { ...state };
+    }
+
+    case "GET_MOVIE_EDIT": {
+      state.movieEdit = action.movieEdit;
       return { ...state };
     }
 
