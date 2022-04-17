@@ -406,3 +406,25 @@ export const deleteMovieAction = (id) => {
     }
   };
 };
+
+
+export const postNewMovieAction = (formData, navigate) => async (dispatch) => {
+  try {
+    await cyberSoftServices.post(`api/QuanLyPhim/ThemPhimUploadHinh`, formData);
+
+    Swal.fire({
+      ...alertSuccess,
+      didDestroy: () => {
+        dispatch(getMoviesListAction());
+        navigate("/admin/movie");
+      },
+    });
+  } catch (error) {
+    alertFailure.title = "Add Failed";
+    alertFailure.text = `${error.response?.data}`;
+    Swal.fire({
+      ...alertFailure,
+    });
+    console.log(error);
+  }
+};
