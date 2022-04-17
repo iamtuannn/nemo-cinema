@@ -57,6 +57,17 @@ export const GlobalStyles = createGlobalStyle`
         max-width: 90%;
     }
 
+    ::-webkit-scrollbar{
+        width: 0.5rem;
+        height: 0.5rem;
+        background-color: #424242;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: #686868; 
+        border-radius: 4px;
+    }
+
     h1, h2, h3, h4{
         margin-bottom: 0;
         color: var(--text-light);
