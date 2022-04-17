@@ -156,7 +156,7 @@ export default function MovieDetail() {
 
   const renderCast = () => (
     <S.Cast>
-      {movie.cast.slice(0, 13).map((cast, index) => (
+      {movie.cast.map((cast, index) => (
         <S.FlexInitial key={index}>
           <S.Card>
             <Link
