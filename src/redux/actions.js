@@ -165,7 +165,7 @@ export const getMoviesListAction = (movieName = "") => {
   };
 };
 
-export const getMovieDetailAction = (id) => {
+export const getMovieDetailAction = (id, navigate) => {
   return async (dispatch) => {
     try {
       dispatch(showLoadingAction);
@@ -210,6 +210,7 @@ export const getMovieDetailAction = (id) => {
       dispatch(hideLoadingAction);
     } catch (error) {
       dispatch(hideLoadingAction);
+      navigate("/")
       console.log("error: ", error);
     }
   };

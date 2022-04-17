@@ -36,8 +36,8 @@ export default function MovieDetail() {
   const id = params.id * 1;
 
   useEffect(() => {
-    dispatch(getMovieDetailAction(id));
-  }, [dispatch, id]);
+    dispatch(getMovieDetailAction(id, navigate));
+  }, [dispatch, id, navigate]);
 
   const renderRuntime = () => {
     let hrs = Math.floor(movie.runtime / 60);
