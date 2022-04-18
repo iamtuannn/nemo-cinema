@@ -27,7 +27,7 @@ export default function NavbarAdmin() {
     ));
 
   const navbar = () => (
-    <Nav.List style={showBar ? { top: "70px" } : {}}>
+    <Nav.List style={showBar ? { top: "60px" } : {}}>
       {renderLink()}
       <Dropdown.LogOut
         onClick={() => {
