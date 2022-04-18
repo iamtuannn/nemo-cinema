@@ -137,10 +137,7 @@ export default function ManageMovies() {
 
             <Link
               key={3}
-              to={`/movie/showtime/${movie.maPhim}`}
-              onClick={() => {
-                localStorage.setItem("movieParams", JSON.stringify(movie));
-              }}
+              to={`/admin/movie/showtime/${movie.maPhim}`}
             >
               <AiOutlineCalendar
                 style={{ color: "#6d4d6e", fontSize: "1.5rem" }}

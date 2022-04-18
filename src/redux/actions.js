@@ -470,3 +470,38 @@ export const getMovieByID = (id, navigate) => async (dispatch) => {
     console.error(error);
   }
 };
+
+export const getCinemaAction = () => async (dispatch) => {
+  try {
+    const result = await cyberSoftServices.get(
+      `api/QuanLyRap/LayThongTinHeThongRap`
+    );
+
+    dispatch({
+      type: "GET_CINEMA",
+      cinemaList: result.data,
+    });
+  } catch (error) {
+    console.log("error", error.response?.data);
+  }
+};
+
+export const postShowTimeAction = (showtime, navigate) => async () => {
+  try {
+    await cyberSoftServices.post(`api/QuanLyDatVe/TaoLichChieu`, showtime);
+
+    alertSuccess.title = "Successfully Added";
+    Swal.fire({ ...alertSuccess, didDestroy: () => navigate("/admin/movie") });
+  } catch (error) {
+    alertFailure.title = "Add Failed";
+    if (error.response.status === 400) {
+      alertFailure.text = `400 - ${error.response.statusText}`;
+    } else {
+      alertFailure.text = error.response.data;
+      console.log(error.response);
+    }
+    Swal.fire({
+      ...alertFailure,
+    });
+  }
+};

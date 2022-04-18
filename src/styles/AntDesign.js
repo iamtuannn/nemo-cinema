@@ -100,6 +100,20 @@ export const AntDesignFormItem = styled(Form.Item)`
 
   .ant-form-item-explain-error {
     text-align: left;
+    color: ${(props) =>
+      props.admin ? "var(--text-light)" : "var(--color-red)"};
+  }
+
+  .ant-select-status-error.ant-select:not(.ant-select-disabled):not(.ant-select-customize-input)
+    .ant-select-selector,
+  .ant-input-number-status-error:not(.ant-input-number-disabled):not(.ant-input-number-borderless).ant-input-number,
+  .ant-picker-status-error.ant-picker,
+  .ant-picker-status-error.ant-picker:not([disabled]):hover {
+    border-color: ${(props) =>
+      props.admin ? "var(--color-primary)!important" : "var(--color-red)!important"};
+  }
+  .ant-select-selection-item {
+    color: var(--dark);
   }
 `;
 
