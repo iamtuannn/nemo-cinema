@@ -505,3 +505,19 @@ export const postShowTimeAction = (showtime, navigate) => async () => {
     });
   }
 };
+
+export const deleteNewsAction = (id) => async (dispatch) => {
+  try {
+    await newsService.delete(id);
+
+    Swal.fire({
+      ...alertSuccess,
+      didDestroy: () => {
+        dispatch(getNewsListAction());
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
