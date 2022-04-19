@@ -536,3 +536,19 @@ export const postNewsAction = (formData, navigate) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const putNewsAction = (formData, id, navigate) => async (dispatch) => {
+  try {
+    await newsService.put(formData, id);
+
+    Swal.fire({
+      ...alertSuccess,
+      didDestroy: () => {
+        dispatch(getNewsListAction());
+        navigate("/admin/news");
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};

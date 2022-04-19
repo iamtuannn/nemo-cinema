@@ -61,7 +61,7 @@ export default function ManageNews() {
       title: "Date",
       width: "10%",
       dataIndex: "published",
-      render: (text, news) => moment(news.published).format("ll"),
+      render: (text, news) => moment(news.published, "DD/MM/YYYY").format("ll"),
     },
     {
       title: "Overview",
@@ -103,7 +103,7 @@ export default function ManageNews() {
       render: (news) => {
         return (
           <>
-            <Link key={1} to={`/admin/news/edit/${news.titleUrl}`}>
+            <Link key={1} to={`/admin/news/edit/${news._id}`}>
               <AiOutlineEdit
                 style={{ color: "#3b586f", marginRight: "0.25rem" }}
               />
