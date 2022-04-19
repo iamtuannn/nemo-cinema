@@ -59,7 +59,7 @@ export const StyledButton = styled.button`
   border: none;
   color: var(--text-light);
   border-radius: 0.5rem;
-  padding: 0.5rem;
+  padding: 0.25rem 0.5rem;
   font-family: "Khand", sans-serif;
   text-transform: ${(props) =>
     props.textTransform ? props.textTransform : "none"};

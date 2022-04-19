@@ -21,8 +21,6 @@ export default function UserInfo() {
   const user = useSelector((state) => state.UserReducer.accountInfo);
   const isLoading = useSelector((state) => state.LoadingReducer.isLoading);
 
-  console.log(user);
-
   let userLogin = localStorage.getItem(USER_LOGIN)
     ? JSON.parse(localStorage.getItem(USER_LOGIN))
     : {};

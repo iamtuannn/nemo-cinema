@@ -61,6 +61,19 @@ export const GlobalStyles = createGlobalStyle`
         height: auto;
     }
 
+    .ant-dropdown-menu-title-content span {
+        color: var(--color-primary);
+    }
+
+    .ant-checkbox-checked .ant-checkbox-inner{
+        background-color: var(--color-primary);
+        border-color: var(--color-primary);
+    }
+
+    .ant-checkbox-input:focus+.ant-checkbox-inner{
+        border-color: var(--color-red);
+    }
+
     ::-webkit-scrollbar{
         width: 0.5rem;
         height: 0.5rem;

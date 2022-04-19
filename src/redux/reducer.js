@@ -1,6 +1,11 @@
 import { applyMiddleware, combineReducers, createStore } from "redux";
 import thunk from "redux-thunk";
-import { MovieModel, NewsModel, PersonModel } from "../models/models";
+import {
+  MovieModel,
+  NewsModel,
+  PersonModel,
+  UserModel,
+} from "../models/models";
 import { GROUPID, TOKEN, USER_LOGIN } from "../utils/config";
 
 let user = {};
@@ -12,9 +17,10 @@ if (localStorage.hasOwnProperty(USER_LOGIN)) {
 const UserReducer = (
   state = {
     userLogin: user,
-    accountInfo: {},
+    accountInfo: new UserModel(),
     ticket: [],
-    usersList: [],
+    usersList: [new UserModel()],
+    userInfo: new UserModel(),
   },
   action
 ) => {

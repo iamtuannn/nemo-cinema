@@ -556,3 +556,66 @@ export const putNewsAction = (formData, id, navigate) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const getUserListAction =
+  (keyword = "") =>
+  async (dispatch) => {
+    try {
+      if (keyword.trim() !== "") {
+        const result = await cyberSoftServices.get(
+          `/api/QuanLyNguoiDung/TimKiemNguoiDung?maNhom=${GROUPID}&tuKhoa=${keyword}`
+        );
+
+        return dispatch({
+          type: "SET_LIST_USERS",
+          usersList: result.data,
+        });
+      }
+
+      const result = await cyberSoftServices.get(
+        `/api/QuanLyNguoiDung/TimKiemNguoiDung?maNhom=${GROUPID}`
+      );
+
+      return dispatch({
+        type: "SET_LIST_USERS",
+        usersList: result.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+export const deleteUserAction = (userName) => async (dispatch) => {
+  try {
+    await cyberSoftServices.delete(
+      `api/QuanLyNguoiDung/XoaNguoiDung?TaiKhoan=${userName}`
+    );
+
+    Swal.fire({
+      ...alertSuccess,
+      didDestroy: () => dispatch(getUserListAction()),
+    });
+  } catch (error) {
+    alertFailure.title = "Delete Failed";
+    alertFailure.text = `${error.response.data}`;
+    Swal.fire({ ...alertFailure });
+  }
+};
+
+export const updateUserAction = (formData) => async (dispatch) => {
+  try {
+    await cyberSoftServices.put(
+      `api/QuanLyNguoiDung/CapNhatThongTinNguoiDung`,
+      formData
+    );
+
+    Swal.fire({
+      ...alertSuccess,
+      didDestroy: () => dispatch(getUserListAction()),
+    });
+  } catch (error) {
+    alertFailure.title = "Delete Failed";
+    alertFailure.text = `${error.response.data}`;
+    Swal.fire({ ...alertFailure });
+  }
+};

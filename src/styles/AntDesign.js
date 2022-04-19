@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Form, Input, Table, Tabs } from "antd";
+import { Form, Input, Modal, Table, Tabs } from "antd";
 import { Breakpoints } from "./Breakpoints";
 
 export const AntDesignTable = styled(Table)`
@@ -67,6 +67,19 @@ export const AntDesignTable = styled(Table)`
 
   .ant-dropdown-menu-item-selected {
     color: var(--color-primary);
+  }
+
+  .ant-table-thead th.ant-table-column-has-sorters:hover {
+    background-color: var(--color-primary);
+  }
+
+  .ant-tag {
+    font-size: 1.3rem;
+    padding: 0.25rem 0.5rem;
+    text-transform: uppercase;
+    font-family: "Khand", sans-serif;
+    min-width: 100px;
+    text-align: center;
   }
 `;
 
@@ -151,5 +164,43 @@ export const AntDesignSearch = styled(Input.Search)`
   .ant-btn-primary:hover {
     border-color: var(--blue-magenta);
     background: var(--blue-magenta);
+  }
+`;
+
+export const AntDesignModal = styled(Modal)`
+  .ant-modal-title {
+    font-size: 1.5rem;
+    font-family: "Changa", sans-serif;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  label {
+    color: #000;
+    text-align: left;
+    display: block;
+  }
+
+  .ant-form-item-label
+    > label.ant-form-item-required:not(.ant-form-item-required-mark-optional):before {
+    display: none;
+  }
+
+  span {
+    font-size: 1.3rem;
+    font-family: "Khand", sans-serif;
+  }
+
+  .ant-btn-primary {
+    height: auto;
+    background-color: var(--color-primary);
+  }
+
+  .ant-select-single.ant-select-show-arrow .ant-select-selection-item {
+    padding: 4px 0;
+  }
+
+  .ant-select-single:not(.ant-select-customize-input) .ant-select-selector {
+    height: auto;
   }
 `;
