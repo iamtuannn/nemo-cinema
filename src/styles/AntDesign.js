@@ -108,9 +108,12 @@ export const AntDesignFormItem = styled(Form.Item)`
     .ant-select-selector,
   .ant-input-number-status-error:not(.ant-input-number-disabled):not(.ant-input-number-borderless).ant-input-number,
   .ant-picker-status-error.ant-picker,
-  .ant-picker-status-error.ant-picker:not([disabled]):hover {
+  .ant-picker-status-error.ant-picker:not([disabled]):hover,
+  .ant-input-status-error:not(.ant-input-disabled):not(.ant-input-borderless).ant-input {
     border-color: ${(props) =>
-      props.admin ? "var(--color-primary)!important" : "var(--color-red)!important"};
+      props.admin
+        ? "var(--color-primary)!important"
+        : "var(--color-red)!important"};
   }
   .ant-select-selection-item {
     color: var(--dark);

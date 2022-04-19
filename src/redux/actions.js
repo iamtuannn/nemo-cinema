@@ -521,3 +521,18 @@ export const deleteNewsAction = (id) => async (dispatch) => {
   }
 };
 
+export const postNewsAction = (formData, navigate) => async (dispatch) => {
+  try {
+    await newsService.post(formData);
+
+    Swal.fire({
+      ...alertSuccess,
+      didDestroy: () => {
+        dispatch(getNewsListAction());
+        navigate("/admin/news");
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
