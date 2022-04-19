@@ -15,6 +15,7 @@ import {
   TMDB_KEY,
   USER_LOGIN,
 } from "../utils/config";
+import moment from "moment";
 
 const alertSuccess = new SweetAlertSuccessful();
 const alertFailure = new SweetAlertFailure();
@@ -249,7 +250,10 @@ export const getNewsListAction = () => {
       dispatch({
         type: "GET_NEWS_LIST",
         newsList: result.data.news.sort((a, b) => {
-          return Date.parse(b.published) - Date.parse(a.published);
+          return (
+            Date.parse(moment(b.published, "DD/MM/YYYY HH:mm").format()) -
+            Date.parse(moment(a.published, "DD/MM/YYYY HH:mm").format())
+          );
         }),
       });
 

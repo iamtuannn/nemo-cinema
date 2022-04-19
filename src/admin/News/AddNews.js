@@ -11,6 +11,7 @@ import { NEMO } from "../../utils/config";
 
 export default function AddNews() {
   document.title = `Add News - ${NEMO}`;
+  const dateFormat = "DD/MM/YYYY HH:mm";
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -29,16 +30,12 @@ export default function AddNews() {
     onSubmit: (values) => dispatch(postNewsAction(values, navigate)),
   });
 
-  const handleChangeDatePicker = (value) => {
-    let published = moment(value).format();
-    formik.setFieldValue("published", published);
-  };
+  const handleChangeDatePicker = (value) =>
+    formik.setFieldValue("published", value.format(dateFormat));
 
-  const handleChangeSwitch = (name) => {
-    return (value) => {
-      formik.setFieldValue(name, value);
-    };
-  };
+  const handleChangeSwitch = (name) => (value) =>
+    formik.setFieldValue(name, value);
+
   return (
     <Container>
       <Heading admin>Add News</Heading>
@@ -93,7 +90,7 @@ export default function AddNews() {
           <DatePicker
             onChange={handleChangeDatePicker}
             showTime
-            format="DD/MM/YYYY, hh:mm a"
+            format={dateFormat}
           />
         </AntDesignFormItem>
 

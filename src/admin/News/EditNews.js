@@ -31,7 +31,7 @@ export default function EditNews() {
       excerpt: news.excerpt,
       titleUrl: news.titleUrl,
       imageUrl: news.imageUrl,
-      published: news.published,
+      published: moment(news.published, dateFormat).format(dateFormat),
       trending: news.trending,
       popular: news.popular,
       body: news.body,
@@ -66,16 +66,12 @@ export default function EditNews() {
     },
   ];
 
-  const handleChangeDatePicker = (value) => {
-    let published = moment(value).format(dateFormat);
-    formik.setFieldValue("published", published);
-  };
+  const handleChangeDatePicker = (value) =>
+    formik.setFieldValue("published", value.format(dateFormat));
 
-  const handleChangeSwitch = (name) => {
-    return (value) => {
-      formik.setFieldValue(name, value);
-    };
-  };
+  const handleChangeSwitch = (name) => (value) =>
+    formik.setFieldValue(name, value);
+
   return (
     <Container>
       <Heading admin>Add News</Heading>
