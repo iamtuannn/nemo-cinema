@@ -5,7 +5,7 @@ import LazyLoad from "react-lazyload";
 
 export const NewsCardV2 = ({ news }) => (
   <NewsCard.MB>
-    <LazyLoad height={400}>
+    <LazyLoad height={400} style={{height: "100%"}}>
       <NewsCard.Box>
         <Link to={`/news/${news.titleUrl}/`} target="_parent">
           <NewsCard.Image
@@ -24,19 +24,20 @@ export const NewsCardV2 = ({ news }) => (
 
 const NewsCard = {
   MB: styled.div`
-    margin-bottom: 1rem;
     border-radius: 0.5rem;
     overflow: hidden;
     animation: fade-in 1s ease-in-out 0s;
+    height: 100%;
 
   `,
   Box: styled.div`
     background: var(--color-secondary);
+    height: 100%;
   `,
 
   Image: styled.img`
     max-width: 100%;
-    min-height: 100%;
+    height: 200px;
     background-color: var(--rgba-blue-magenta);
   `,
 

@@ -23,7 +23,7 @@ export const NewsCardV1 = ({ news }) => (
           <div>
             <NewsCard.Excerpt>{news.excerpt}</NewsCard.Excerpt>
             <NewsCard.Published>
-              published {moment(news.published).startOf("hour").fromNow()}
+              published {moment(news.published, "DD/MM/YYYY HH:mm").startOf("hour").fromNow()}
             </NewsCard.Published>
           </div>
         </NewsCard.Content>

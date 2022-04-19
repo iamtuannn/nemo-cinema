@@ -49,7 +49,7 @@ export default function News() {
                 <S.Title>{news.title}</S.Title>
                 <S.Excerpt>{news.excerpt}</S.Excerpt>
                 <S.Published>
-                  published {moment(news.published).startOf("hour").fromNow()}
+                published {moment(news.published, "DD/MM/YYYY HH:mm").startOf("hour").fromNow()}
                 </S.Published>
                 <S.Image
                   src={news.imageUrl !== "" ? news.imageUrl : noImage}
@@ -94,7 +94,7 @@ export default function News() {
 const S = {
   Box: styled.div`
     display: grid;
-    grid-template-columns: 1fr 300px;
+    grid-template-columns: 1fr 320px;
     gap: 2rem;
     animation: fade-in 1s ease-in-out 0s;
     transition: all 1s ease-in-out;
