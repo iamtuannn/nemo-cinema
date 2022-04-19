@@ -17,14 +17,14 @@ class NewsService {
 
   post = (formData) =>
     axios({
-      url: `${API_NEWS}/news/`,
+      url: `${API_NEWS}`,
       method: "POST",
       data: formData,
     });
 
   put = (formData, id) => {
     return axios({
-      url: `${API_NEWS}/news/${id}`,
+      url: `${API_NEWS}/${id}`,
       method: "PUT",
       data: formData,
     });
@@ -33,7 +33,7 @@ class NewsService {
   delete = (id) =>
     axios({
       method: "DELETE",
-      url: `${API_NEWS}/news/${id}`,
+      url: `${API_NEWS}/${id}`,
     });
 }
 
