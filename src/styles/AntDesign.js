@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Form, Input, Modal, Table, Tabs } from "antd";
+import { Form, Input, Modal, Table, Tabs, Progress } from "antd";
 import { Breakpoints } from "./Breakpoints";
 
 export const AntDesignTable = styled(Table)`
@@ -202,5 +202,15 @@ export const AntDesignModal = styled(Modal)`
 
   .ant-select-single:not(.ant-select-customize-input) .ant-select-selector {
     height: auto;
+  }
+`;
+
+export const AntDesignProgress = styled(Progress)`
+  .ant-progress-bg {
+    background-color: #ce9ad9;
+  }
+
+  .ant-progress-text {
+    color: var(--text-light);
   }
 `;

@@ -21,6 +21,7 @@ const UserReducer = (
     ticket: [],
     usersList: [new UserModel()],
     userInfo: new UserModel(),
+    totalTickets: 100,
   },
   action
 ) => {
@@ -45,6 +46,11 @@ const UserReducer = (
       return { ...state };
     }
 
+    case "SET_TOTAL_TICKETS": {
+      state.totalTickets = action.totalTickets;
+      return { ...state };
+    }
+
     default:
       return state;
   }
@@ -55,7 +61,7 @@ const MovieReducer = (
     movie: new MovieModel(),
     comingSoon: [],
     nowShowing: [],
-    movieList: [],
+    movieList: [new MovieModel()],
     movieEdit: {
       maPhim: "",
       tenPhim: "",

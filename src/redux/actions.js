@@ -619,3 +619,33 @@ export const updateUserAction = (formData) => async (dispatch) => {
     Swal.fire({ ...alertFailure });
   }
 };
+
+export const getTotalTickets = () => async (dispatch) => {
+  try {
+    const userList = await cyberSoftServices
+      .get(`/api/QuanLyNguoiDung/TimKiemNguoiDung?maNhom=${GROUPID}`)
+      .then((res) => res.data.map((user) => ({ taiKhoan: user.taiKhoan })));
+
+    const getUserTickets = (user) =>
+      cyberSoftServices
+        .post(`api/QuanLyNguoiDung/ThongTinTaiKhoan`, user)
+        .then((res) => res.data.thongTinDatVe.length);
+
+    const getTicketsList = () => {
+      const requests = userList.map((user) =>
+        getUserTickets(user).then((res) => res)
+      );
+
+      return Promise.all(requests).then((res) => res.reduce((a, b) => a + b));
+    };
+
+    getTicketsList().then((res) =>
+      dispatch({
+        type: "SET_TOTAL_TICKETS",
+        totalTickets: res,
+      })
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};

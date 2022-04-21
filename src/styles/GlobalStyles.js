@@ -10,6 +10,7 @@ export const GlobalStyles = createGlobalStyle`
         --color-footer: rgba(19, 18, 20, 0.98);
         --color-red: #ca4242;
         --light-red: #dea3a3;
+        --deep-peach: #FFC5A3;
         --blue-magenta: #483f5e;
         --vampire-black: #080808;
         --rgba-blue-magenta: rgba(66, 63, 87, 0.8);
@@ -19,7 +20,7 @@ export const GlobalStyles = createGlobalStyle`
         --light: hsla(0, 100%, 100%, 0.88);
         --dark: hsla(248, 14%, 11%, 0.88);
         --shadow-light: 0 4px 8px 0 #ffffff4d;
-        --shadow-black: 0 4px 8px 0 #00000040;
+        --shadow-dark: 0 4px 8px 0 #00000040;
         --dark-gray:#696969 ;
         --dark-blue: #4b4762;
         --dark-pink: #713758;
