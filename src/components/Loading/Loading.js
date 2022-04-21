@@ -6,50 +6,20 @@ export const LoadingCardV2 = () => <V2 />;
 export const LoadingPageV0 = () => <V0 />;
 export const LoadingPageV1 = (props) => (
   <GridCardV2 grid={props.grid ? true : false}>
-    <V1 />
-    <V1 />
-    <V1 />
-    <V1 />
-    <V1 />
-    <V1 />
-    <V1 />
-    <V1 />
-    <V1 />
-    <V1 />
-    <V1 />
-    <V1 />
-    <V1 />
-    <V1 />
-    <V1 />
-    <V1 />
-    <V1 />
-    <V1 />
-    <V1 />
-    <V1 />
+    {Array(20)
+      .fill(0)
+      .map((item, i) => (
+        <V1 key={i} />
+      ))}
   </GridCardV2>
 );
 export const LoadingPageV2 = (props) => (
   <GridCardV1 grid={props.grid ? true : false}>
-    <V2 />
-    <V2 />
-    <V2 />
-    <V2 />
-    <V2 />
-    <V2 />
-    <V2 />
-    <V2 />
-    <V2 />
-    <V2 />
-    <V2 />
-    <V2 />
-    <V2 />
-    <V2 />
-    <V2 />
-    <V2 />
-    <V2 />
-    <V2 />
-    <V2 />
-    <V2 />
+    {Array(20)
+      .fill(0)
+      .map((item, i) => (
+        <V2 key={i} />
+      ))}
   </GridCardV1>
 );
 

@@ -14,12 +14,6 @@ export default function News() {
     isLoading: true,
   });
 
-  const Loading = () => (
-    <S.Card>
-      <LoadingCardV1 />
-    </S.Card>
-  );
-
   useEffect(() => {
     const getNews = async () => {
       const result = await newsService.get();
@@ -39,14 +33,13 @@ export default function News() {
   return (
     <S.Box>
       {news.isLoading ? (
-        <>
-          {Loading()}
-          {Loading()}
-          {Loading()}
-          {Loading()}
-          {Loading()}
-          {Loading()}
-        </>
+        Array(6)
+          .fill(0)
+          .map((item, i) => (
+            <S.Card key={i}>
+              <LoadingCardV1 />
+            </S.Card>
+          ))
       ) : (
         <>
           {news.list.map((news, i) => (
@@ -153,5 +146,3 @@ const Card = {
     }
   `,
 };
-
-
