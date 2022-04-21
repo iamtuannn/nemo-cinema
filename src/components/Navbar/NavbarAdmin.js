@@ -27,7 +27,15 @@ export default function NavbarAdmin() {
     ));
 
   const navbar = () => (
-    <Nav.List style={showBar ? { top: "60px" } : {}}>
+    <Nav.List style={showBar ? { top: "64px" } : {}}>
+      <Dropdown.Admin
+        onClick={() => {
+          navigate("/admin");
+          setShowBar(false);
+        }}
+      >
+        Dashboard
+      </Dropdown.Admin>
       {renderLink()}
       <Dropdown.LogOut
         onClick={() => {
@@ -61,7 +69,7 @@ export default function NavbarAdmin() {
 
 const Nav = {
   Box: styled.header`
-    background-color: ${props => props.backgroundColor};
+    background-color: ${(props) => props.backgroundColor};
     padding: 0.5rem 1rem;
     transition: all 0.5s ease-in-out 0.25s;
 
@@ -90,7 +98,7 @@ const Nav = {
   LogoBar: styled.div`
     @media (max-width: 900px) {
       width: 100%;
-      padding: 0 2rem;
+      padding: 0.25rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -99,13 +107,21 @@ const Nav = {
 
   Logo: styled.span`
     font-size: 2.5rem;
-    font-family: "Khand", sans-serif;
+    font-family: "Changa", sans-serif;
     text-transform: uppercase;
     color: var(--text-light);
     font-weight: 700;
 
+    @media (max-width: 1024px) {
+      font-size: 2.2rem;
+    }
+
     @media (max-width: 400px) {
       font-size: 1.8rem;
+    }
+
+    @media (max-width: 300px) {
+      font-size: 1.6rem;
     }
   `,
 
@@ -179,7 +195,7 @@ const Dropdown = {
     margin: 0 0.5rem;
     transition: all 0.5s ease-in-out;
     border-radius: 4px;
-    background-color: var(--light-red);
+    background-color: var(--deep-peach);
 
     :hover .dropdown-content {
       display: block;
@@ -216,7 +232,7 @@ const Dropdown = {
   Content: styled.div`
     display: none;
     position: absolute;
-    background-color: var(--light-red);
+    background-color: var(--deep-peach);
     box-shadow: var(--shadow-light);
     z-index: 100;
     border-radius: 8px;
@@ -242,7 +258,7 @@ const Dropdown = {
     font-size: 1.25rem;
     line-height: 1.75rem;
     padding: 0.5rem 1.25rem;
-    color: var(--text-light);
+    color: var(--dark);
     display: block;
     text-transform: capitalize;
     transition: all 0.5s ease-in-out;
@@ -256,7 +272,7 @@ const Dropdown = {
     }
 
     :hover {
-      color: var(--text-light);
+      color: var(--dark);
     }
 
     @media (max-width: 900px) {
@@ -265,6 +281,7 @@ const Dropdown = {
       border: var(--border);
       border-radius: 0;
       text-align: left;
+      color: var(--text-light);
 
       :hover {
         color: var(--text-light);
@@ -292,6 +309,32 @@ const Dropdown = {
       width: 100%;
       margin: 0;
       border-radius: 0;
+    }
+  `,
+
+  Admin: styled.div`
+    display: block;
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    padding: 0.5rem 1.25rem;
+    margin: 0.5rem;
+    color: var(--dark);
+    display: block;
+    border-radius: 4px;
+    background-color: var(--deep-peach);
+    cursor: pointer;
+    transition: all 0.5s ease-in-out;
+    font-family: "Khand", sans-serif;
+
+    @media (max-width: 900px) {
+      padding: 1rem 1.5rem;
+      width: 100%;
+      margin: 0;
+      border: var(--border);
+      border-radius: 0;
+      text-align: left;
+      background-color: var(--color-nav);
+      color: var(--text-light);
     }
   `,
 };

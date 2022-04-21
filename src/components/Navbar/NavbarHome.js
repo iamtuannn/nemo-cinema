@@ -76,7 +76,7 @@ export default function NavbarHome() {
             {showBar ? <Nav.CloseIcon /> : <Nav.BarIcon />}
           </Nav.Icon>
         </Nav.LogoBar>
-        <Nav.List style={showBar ? { top: "70px" } : {}}>
+        <Nav.List style={showBar ? { top: "65px" } : {}}>
           {NavBarLink.map((link) => renderLink(link))}
           {isLogin()}
         </Nav.List>
@@ -138,6 +138,10 @@ const Nav = {
 
     @media (max-width: 400px) {
       font-size: 1.8rem;
+    }
+
+    @media (max-width: 300px) {
+      font-size: 1.6rem;
     }
   `,
 
