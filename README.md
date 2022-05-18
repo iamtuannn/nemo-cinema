@@ -12,7 +12,7 @@
 <h3 align="center">API from 
 <a href="https://cybersoft.edu.vn/">CyberSoft</a>, 
 <a href="https://www.themoviedb.org/">The Movie Database</a> and 
-<a href="https://github.com/tuanhngf/nemo-api-v1">nemo-api-v1</a>.</h3>
+<a href="https://github.com/tuanhngf/my-api-v1">my-api-v1</a>.</h3>
 
 ## :sparkles: Features 
 
