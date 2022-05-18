@@ -9,7 +9,7 @@ import { cyberSoftServices } from "../services/cyberSoftServices";
 import { newsService } from "../services/newsServices";
 import {
   API_NEWS,
-  dbMovie,
+  BREAK_DAY,
   GROUPID,
   NEMO,
   TMDB_KEY,
@@ -171,37 +171,65 @@ export const getMovieDetailAction = (id, navigate) => {
   return async (dispatch) => {
     try {
       dispatch(showLoadingAction);
-      let obj = dbMovie.find((movie) => movie.maPhim === id);
+      let connectionData = await connectionService
+        .get()
+        .then((res) => res.data.movies);
 
-      let tmdb = await cyberSoftServices.getTMDB(
-        `movie/${obj.tmdb}?api_key=${TMDB_KEY}&language=en-US`
+      let connection = connectionData.find(
+        (movie) => movie.cybersoftID === id.toString()
       );
 
-      document.title = `${tmdb.data.title} - ${NEMO}`;
+      const { cybersoftID, tmdbID } = connection;
 
-      let cybersoft = await cyberSoftServices.get(
-        `api/QuanLyRap/LayThongTinLichChieuPhim?MaPhim=${obj.maPhim}`
-      );
+      let tmdb = await cyberSoftServices
+        .getTMDB(`movie/${tmdbID}?api_key=${TMDB_KEY}&language=en-US`)
+        .then((res) => res.data);
 
-      let cast = await cyberSoftServices.getTMDB(
-        `movie/${obj.tmdb}/credits?api_key=${TMDB_KEY}&language=en-US`
-      );
+      const {
+        runtime,
+        backdrop_path,
+        poster_path,
+        title,
+        tagline,
+        genres,
+        overview,
+      } = tmdb;
 
-      let movie = {
-        id: tmdb.data.id,
-        runtime: tmdb.data.runtime,
-        genres: tmdb.data.genres,
-        poster_path: tmdb.data.poster_path,
-        backdrop_path: tmdb.data.backdrop_path,
-        title: tmdb.data.title,
-        tagline: tmdb.data.tagline,
-        overview: tmdb.data.overview,
-        showtime: cybersoft.data.heThongRapChieu,
-        trailer: cybersoft.data.trailer,
-        titleUrl: cybersoft.data.biDanh,
-        idMovie: cybersoft.data.maPhim,
-        release_date: cybersoft.data.ngayKhoiChieu,
-        cast: cast.data.cast,
+      document.title = `${title} - ${NEMO}`;
+
+      let cybersoft = await cyberSoftServices
+        .get(`api/QuanLyRap/LayThongTinLichChieuPhim?MaPhim=${cybersoftID}`)
+        .then((res) => res.data);
+
+      const {
+        heThongRapChieu: showtime,
+        trailer,
+        biDanh: url,
+        ngayKhoiChieu: release_date,
+      } = cybersoft;
+
+      let cast = await cyberSoftServices
+        .getTMDB(`movie/${tmdbID}/credits?api_key=${TMDB_KEY}&language=en-US`)
+        .then((res) => res.data.cast);
+
+      const isShowing = BREAK_DAY > Date.parse(release_date);
+
+      const movie = {
+        runtime,
+        backdrop_path,
+        poster_path,
+        title,
+        tagline,
+        genres,
+        overview,
+        tmdbID,
+        showtime,
+        trailer,
+        url,
+        release_date,
+        cybersoftID,
+        cast,
+        isShowing,
       };
 
       await dispatch({

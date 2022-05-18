@@ -24,7 +24,7 @@ import { SweetAlertWarning } from "../../models/models";
 const { TabPane } = Tabs;
 
 export default function MovieDetail() {
-  const { movie } = useSelector((state) => state.MovieReducer);
+  const movie = useSelector((state) => state.MovieReducer.movie);
   const isLoading = useSelector((state) => state.LoadingReducer.isLoading);
 
   const alertWarning = new SweetAlertWarning();
@@ -214,14 +214,12 @@ export default function MovieDetail() {
 
   const renderShowtime = () => (
     <S.Showtime>
-      {Date.now() < Date.parse(movie.release_date) ? (
+      {movie.isShowing === false ? (
         <>
           <S.NoShowtime>
             We don't have any showtime for {movie.title}
           </S.NoShowtime>
-          <S.NoShowtime>
-            {movie.title} expected on {moment(movie.release_date).format("ll")}
-          </S.NoShowtime>
+          <S.NoShowtime>{movie.title} will be out soon.</S.NoShowtime>
         </>
       ) : movie.showtime.length === 0 ? (
         <S.NoShowtime>
