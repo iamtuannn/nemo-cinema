@@ -61,7 +61,20 @@ const MovieReducer = (
     movie: new MovieModel(),
     comingSoon: [],
     nowShowing: [],
-    movieList: [new MovieModel()],
+    movieList: [
+      {
+        biDanh: "",
+        danhGia: 0,
+        hinhAnh:
+          "",
+        isShowing: false,
+        maNhom: "",
+        maPhim: 0,
+        moTa: "",
+        tenPhim: "",
+        trailer: "",
+      },
+    ],
     movieEdit: {
       maPhim: "",
       tenPhim: "",
@@ -78,11 +91,9 @@ const MovieReducer = (
     case "GET_MOVIES_LIST": {
       state.movieList = action.movieList;
       state.comingSoon = state.movieList
-        .filter((movie) => Date.parse(movie.ngayKhoiChieu) > Date.now())
+        .filter((movie) => !movie.isShowing)
         .reverse();
-      state.nowShowing = state.movieList.filter(
-        (movie) => Date.parse(movie.ngayKhoiChieu) < Date.now()
-      );
+      state.nowShowing = state.movieList.filter((movie) => movie.isShowing);
       return { ...state };
     }
 

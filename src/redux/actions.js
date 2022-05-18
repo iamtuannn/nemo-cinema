@@ -142,22 +142,40 @@ export const getMoviesListAction = (movieName = "") => {
       let result = "";
 
       if (movieName.trim() !== "") {
-        result = await cyberSoftServices.get(
-          `api/QuanLyPhim/LayDanhSachPhim?maNhom=${GROUPID}&tenPhim=${movieName}`
-        );
+        result = await cyberSoftServices
+          .get(
+            `api/QuanLyPhim/LayDanhSachPhim?maNhom=${GROUPID}&tenPhim=${movieName}`
+          )
+          .then((res) => res.data);
       } else {
-        result = await cyberSoftServices.get(
-          `api/QuanLyPhim/LayDanhSachPhim?maNhom=${GROUPID}`
-        );
+        result = await cyberSoftServices
+          .get(`api/QuanLyPhim/LayDanhSachPhim?maNhom=${GROUPID}`)
+          .then((res) => res.data);
       }
+
+      let movies = [];
+
+      result
+        .filter((movie) => movie.maPhim > 10000)
+        .sort((a, b) =>
+          Date.parse(a.ngayKhoiChieu) < Date.parse(b.ngayKhoiChieu) ? 1 : -1
+        )
+        .forEach((movie) => {
+          const isShowing = BREAK_DAY > Date.parse(movie.ngayKhoiChieu);
+
+          const { ...rest } = movie;
+
+          const movieUpdate = {
+            ...rest,
+            isShowing: isShowing,
+          };
+
+          movies.push(movieUpdate);
+        });
 
       dispatch({
         type: "GET_MOVIES_LIST",
-        movieList: result.data
-          .filter((movie) => movie.maPhim > 10000)
-          .sort((a, b) =>
-            Date.parse(a.ngayKhoiChieu) < Date.parse(b.ngayKhoiChieu) ? 1 : -1
-          ),
+        movieList: movies,
       });
       dispatch(hideLoadingAction);
     } catch (error) {

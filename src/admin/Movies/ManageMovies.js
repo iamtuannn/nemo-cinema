@@ -42,6 +42,9 @@ export default function ManageMovies() {
       dataIndex: "maPhim",
       width: "8%",
       fixed: "left",
+      sorter: {
+        compare: (a, b) => a.maPhim - b.maPhim,
+      },
     },
     {
       title: "Poster",
@@ -75,7 +78,7 @@ export default function ManageMovies() {
       render: (text, movie) => {
         return (
           <>
-            {movie.moTa?.length > 200
+            {movie.moTa.length > 200
               ? movie.moTa.substr(0, 200) + " ..."
               : movie.moTa}
           </>
@@ -88,27 +91,27 @@ export default function ManageMovies() {
       width: "10%",
       render: (movie) => (
         <>
-          {Date.parse(movie.ngayKhoiChieu) > Date.now() ? (
-            <Tag color="magenta">COMING SOON</Tag>
-          ) : (
+          {movie.isShowing ? (
             <Tag color="cyan">NOW PLAYING</Tag>
+          ) : (
+            <Tag color="magenta">COMING SOON</Tag>
           )}
         </>
       ),
+      filters: [
+        { text: "NOW PLAYING", value: true },
+        { text: "COMING SOON", value: false },
+      ],
+      onFilter: (value, record) => record.isShowing === value,
     },
+
     {
       title: "Action",
       dataIndex: "maPhim",
       render: (text, movie) => {
         return (
           <>
-            <Link
-              key={1}
-              to={`/admin/movie/edit/${movie.maPhim}`}
-              onClick={() => {
-                localStorage.setItem("movieParams", JSON.stringify(movie));
-              }}
-            >
+            <Link key={1} to={`/admin/movie/edit/${movie.maPhim}`}>
               <AiOutlineEdit
                 style={{
                   color: "#3b586f",
@@ -156,7 +159,7 @@ export default function ManageMovies() {
     },
   ];
 
-  const data = movies;
+  const data = movies.sort((a, b) => (a.maPhim < b.maPhim ? 1 : -1));
 
   const onSearch = (value) => {
     dispatch(getMoviesListAction(value));
@@ -186,7 +189,7 @@ export default function ManageMovies() {
         columns={columns}
         dataSource={data}
         onChange={onChange}
-        rowKey={"maPhim"}
+        rowKey="maPhim"
         scroll={{ x: 1300 }}
       />
 

@@ -9,7 +9,7 @@ export const API_CONNECTION = process.env.REACT_APP_API_CONNECTION
 export const AUTHOR = "Hoang A. Tuan";
 export const AUTHOR_URL = "https://www.anhtuan.info";
 export const NEMO = "Nemo Cinema";
-export const BREAK_DAY = Date.parse("2022-02-10T00:00:00")
+export const BREAK_DAY = Date.parse("2022-06-10T00:00:00")
 export const BASE_API_BACKDROP_URL =
   "https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces";
 export const BASE_API_POSTER_URL =
