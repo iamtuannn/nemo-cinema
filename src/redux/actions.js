@@ -16,6 +16,7 @@ import {
   USER_LOGIN,
 } from "../utils/config";
 import moment from "moment";
+import { connectionService } from "../services/connectionServices";
 
 const alertSuccess = new SweetAlertSuccessful();
 const alertFailure = new SweetAlertFailure();
@@ -646,6 +647,73 @@ export const getTotalTickets = () => async (dispatch) => {
       })
     );
   } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getConnectionAction = () => {
+  return async (dispatch) => {
+    try {
+      let result = await connectionService.get();
+
+      dispatch({
+        type: "GET_CONNECTION",
+        connection: result.data.movies.reverse(),
+      });
+    } catch (error) {
+      alertFailure.title = "Get Connection Failed";
+      Swal.fire({ ...alertFailure });
+      console.log(error);
+    }
+  };
+};
+
+export const deleteConnectionAction = (id) => async (dispatch) => {
+  try {
+    await connectionService.delete(id);
+
+    Swal.fire({
+      ...alertSuccess,
+      didDestroy: () => {
+        dispatch(getConnectionAction());
+      },
+    });
+  } catch (error) {
+    alertFailure.title = "Delete Connection Failed";
+    Swal.fire({ ...alertFailure });
+  }
+};
+
+export const postConnectionAction = (formData) => async (dispatch) => {
+  try {
+    await connectionService.post(formData);
+
+    Swal.fire({
+      ...alertSuccess,
+      didDestroy: () => {
+        dispatch(getConnectionAction());
+      },
+    });
+  } catch (error) {
+    alertFailure.title = "Create Connection Failed";
+    Swal.fire({ ...alertFailure });
+    console.log(error);
+  }
+};
+
+export const putConnectionAction = (formData, id) => async (dispatch) => {
+  try {
+    await connectionService.put(formData, id);
+
+    Swal.fire({
+      ...alertSuccess,
+      didDestroy: () => {
+        dispatch(getConnectionAction());
+      },
+    });
+  } catch (error) {
+    alertFailure.title = "Update Connection Failed";
+    Swal.fire({ ...alertFailure });
     console.log(error);
   }
 };

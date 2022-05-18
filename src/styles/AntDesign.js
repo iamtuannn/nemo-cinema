@@ -154,7 +154,7 @@ export const AntDesignTab = styled(Tabs)`
 `;
 
 export const AntDesignSearch = styled(Input.Search)`
-  margin-bottom: 1rem;
+  margin-right: 0.5rem;
 
   .ant-btn-primary {
     border-color: var(--blue-magenta);

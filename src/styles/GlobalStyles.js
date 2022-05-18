@@ -75,6 +75,10 @@ export const GlobalStyles = createGlobalStyle`
         border-color: var(--color-red);
     }
 
+    .ant-select span{
+        color: var(--color-red);;
+    }
+
     ::-webkit-scrollbar{
         width: 0.5rem;
         height: 0.5rem;

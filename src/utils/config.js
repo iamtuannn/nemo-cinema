@@ -5,6 +5,7 @@ export const TMDB = "https://api.themoviedb.org/3/";
 export const TMDB_KEY = process.env.REACT_APP_TMDB_KEY;
 export const GROUPID = process.env.REACT_APP_GROUPID;
 export const API_NEWS = process.env.REACT_APP_API_NEWS;
+export const API_CONNECTION = process.env.REACT_APP_API_CONNECTION 
 export const AUTHOR = "Hoang A. Tuan";
 export const AUTHOR_URL = "https://www.anhtuan.info";
 export const NEMO = "Nemo Cinema";

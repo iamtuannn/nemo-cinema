@@ -1,5 +1,5 @@
 import { Tag } from "antd";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NEMO } from "../../utils/config";
 import { getMoviesListAction, deleteMovieAction } from "../../redux/actions";
@@ -12,12 +12,21 @@ import {
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import { Container, Heading } from "../../styles/Styles";
-import { AntDesignSearch, AntDesignTable } from "../../styles/AntDesign";
+import {
+  AntDesignModal,
+  AntDesignSearch,
+  AntDesignTable,
+} from "../../styles/AntDesign";
 import { SweetAlertWarning } from "../../models/models";
+import { FaPlus } from "react-icons/fa";
+import styled from "styled-components";
+import Connection from "./Connection";
 
 export default function ManageMovies() {
   document.title = `Manage Movies - ${NEMO}`;
   const dispatch = useDispatch();
+
+  const [visible, setVisible] = useState(false);
 
   const movies = useSelector((state) => state.MovieReducer.movieList);
   const alertWarning = new SweetAlertWarning();
@@ -66,7 +75,7 @@ export default function ManageMovies() {
       render: (text, movie) => {
         return (
           <>
-            {movie.moTa.length > 200
+            {movie.moTa?.length > 200
               ? movie.moTa.substr(0, 200) + " ..."
               : movie.moTa}
           </>
@@ -135,10 +144,7 @@ export default function ManageMovies() {
               />
             </span>
 
-            <Link
-              key={3}
-              to={`/admin/movie/showtime/${movie.maPhim}`}
-            >
+            <Link key={3} to={`/admin/movie/showtime/${movie.maPhim}`}>
               <AiOutlineCalendar
                 style={{ color: "#6d4d6e", fontSize: "1.5rem" }}
               />
@@ -164,12 +170,17 @@ export default function ManageMovies() {
     <Container>
       <Heading admin>Manage Movies</Heading>
 
-      <AntDesignSearch
-        placeholder="Search movie..."
-        enterButton={<AiOutlineSearch />}
-        size="large"
-        onSearch={onSearch}
-      />
+      <S.Flex>
+        <AntDesignSearch
+          placeholder="Search movie..."
+          enterButton={<AiOutlineSearch />}
+          size="large"
+          onSearch={onSearch}
+        />
+        <S.Add onClick={() => setVisible(true)}>
+          <FaPlus />
+        </S.Add>
+      </S.Flex>
 
       <AntDesignTable
         columns={columns}
@@ -178,6 +189,40 @@ export default function ManageMovies() {
         rowKey={"maPhim"}
         scroll={{ x: 1300 }}
       />
+
+      <AntDesignModal
+        visible={visible}
+        title="Connection"
+        centered
+        onOk={() => {
+          setVisible(false);
+        }}
+        closable
+        cancelButtonProps={{ hidden: true }}
+      >
+        <Connection />
+      </AntDesignModal>
     </Container>
   );
 }
+
+const S = {
+  Flex: styled.div`
+    display: flex;
+    align-items: center;
+    height: 40px;
+    margin-bottom: 1rem;
+  `,
+  Add: styled.div`
+    display: flex;
+    place-content: center;
+    height: 40px;
+    width: 48px;
+    justify-content: center;
+    align-items: center;
+    border-color: var(--blue-magenta);
+    background: var(--blue-magenta);
+    border-radius: 0.25rem;
+    cursor: pointer;
+  `,
+};

@@ -239,6 +239,21 @@ const ModalVideoReducer = (
   }
 };
 
+const ConnectionReducer = (
+  state = { connection: [{ _id: "", tmdbID: "", cybersoftID: "" }] },
+  action
+) => {
+  switch (action.type) {
+    case "GET_CONNECTION": {
+      state.connection = action.connection;
+      return { ...state };
+    }
+
+    default:
+      return state;
+  }
+};
+
 const rootReducer = combineReducers({
   UserReducer,
   MovieReducer,
@@ -247,6 +262,7 @@ const rootReducer = combineReducers({
   LoadingReducer,
   PeopleReducer,
   ModalVideoReducer,
+  ConnectionReducer,
 });
 
 export const store = createStore(rootReducer, applyMiddleware(thunk));
