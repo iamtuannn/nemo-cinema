@@ -14,18 +14,18 @@ export const Rounded = styled.div`
 
 export const Content = styled.div`
   position: relative;
-  min-height: calc(((100vw - 5rem) / 2) * 1.5);
+  height: calc(((100vw - 5rem) / 2) * 1.5);
   overflow: hidden;
 
   @media (min-width: 768px) {
-    min-height: calc(((100vw - 6rem) / 3) * 1.5);
+    height: calc(((100vw - 6rem) / 3) * 1.5);
   }
   @media (min-width: 1024px) {
-    min-height: calc(((100vw - 7rem) / 4) * 1.5);
+    height: calc(((100vw - 7rem) / 4) * 1.5);
   }
 
   @media (min-width: 1440px) {
-    min-height: calc(((1440px - 8rem) / 5) * 1.5);
+    height: calc(((1440px - 8rem) / 5) * 1.5);
   }
 `;
 

@@ -27,15 +27,15 @@ export const Wrapper = styled.div`
 `;
 
 export const Poster = styled.img`
-  min-width: 94px;
-  min-height: 141px;
+  width: 94px;
+  height: 141px;
   width: 94px;
   height: 141px;
   background-color: var(--rgba-blue-magenta);
 
   @media (min-width: 1024px) {
-    min-width: 136px;
-    min-height: 204px;
+    width: 136px;
+    height: 204px;
     width: 136px;
     height: 204px;
   }

@@ -5,11 +5,11 @@ import getVideoId from "get-video-id";
 import noImage from "../../../images/no-image.svg";
 import LazyLoad from "react-lazyload";
 
-export const MovieCardV1 = ({ movie }) => {
+export const MovieCardV1 = ({ movie, isRSlick = false }) => {
   const dispatch = useDispatch();
   return (
     <S.Card>
-      <LazyLoad height={200}>
+      <LazyLoad height={isRSlick ? 200 : 400}>
         <S.Rounded>
           <S.Content>
             {movie.hinhAnh !== "" ? (

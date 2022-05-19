@@ -33,7 +33,7 @@ export default function Movies({ movies }) {
       ) : (
         <ReactSlick {...settings}>
           {movies.map((movie, i) => (
-            <MovieCardV1 movie={movie} key={i} />
+            <MovieCardV1 movie={movie} isRSlick={true} key={i} />
           ))}
         </ReactSlick>
       )}
