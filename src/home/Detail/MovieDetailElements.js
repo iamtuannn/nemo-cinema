@@ -241,7 +241,7 @@ export const Runtime = styled.span`
 
 export const Genres = styled.span`
   position: relative;
-  padding: 1rem;
+  padding: 0.5rem 0;
 
   &&::after {
     content: "";
@@ -252,6 +252,8 @@ export const Genres = styled.span`
   }
 
   @media (min-width: 1024px) {
+    padding-left: 1.5rem;
+
     &&::after {
       content: "\u2022";
     }
