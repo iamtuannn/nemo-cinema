@@ -8,6 +8,7 @@ import {
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import getVideoId from "get-video-id";
+import BannerList from "../../utils/BannerList";
 
 export default function Banner() {
   const dispatch = useDispatch();
@@ -128,90 +129,13 @@ const S = {
   `,
 };
 
-const BannerList = [
-  {
-    id: 1,
-    name: "Doctor Strange in the Multiverse of Madness",
-    backdrop:
-      "https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/ndCSoasjIZAMMDIuMxuGnNWu4DU.jpg",
-    link: "/movie/doctor-strange-in-the-multiverse-of-madness-10197/",
-    trailer: "https://youtu.be/Rt_UqUm38BI",
-    tagline: "Enter a new dimension of Strange.",
-  },
-  {
-    id: 2,
-    name: "BLACKPINK: Light Up the Sky",
-    backdrop:
-      "https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/dKtkvL8tScUlh67vig2Ama74Jz1.jpg",
-    link: "/movie/blackpink-light-up-the-sky-10190/",
-    trailer: "https://youtu.be/7jx_vdvxWu0",
-    tagline: "The rise of a global phenomena.",
-  },
-  {
-    id: 3,
-    name: "Death on the Niles",
-    backdrop:
-      "https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/lRbDyjI7HEaXxflFQbYpqHRGFBJ.jpg",
-    link: "/movie/death-on-the-nile-10202/",
-    trailer: "https://youtu.be/JM1U-Whb-P0",
-    tagline: "Murder was just the beginning.",
-  },
-  {
-    id: 4,
-    name: "Eternals",
-    backdrop:
-      "https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/c6H7Z4u73ir3cIoCteuhJh7UCAR.jpg",
-    link: "/movie/eternals-10198/",
-    trailer: "https://youtu.be/x_me3xsvDgk",
-    tagline: "In the beginning...",
-  },
-  {
-    id: 5,
-    name: "Red Notice",
-    backdrop:
-      "https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/dK12GIdhGP6NPGFssK2Fh265jyr.jpg",
-    link: "/movie/red-notice-10257/",
-    trailer: "https://youtu.be/Pj0wz7zu3Ms",
-    tagline: "Pro and cons.",
-  },
-  {
-    id: 6,
-    name: "Lightyear",
-    backdrop:
-      "https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/ce7o5nkpZD6Dp5luLnSKMSUjatl.jpg",
-    link: "/movie/lightyear-10256/",
-    trailer: "https://youtu.be/BwPL0Md_QFQ",
-    tagline: "Infinity awaits.",
-  },
-  {
-    id: 7,
-    name: "Don't Look Up",
-    backdrop:
-      "https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/nvxrQQspxmSblCYDtvDAbVFX8Jt.jpg",
-    link: "/movie/don-t-look-up-10200/",
-    trailer: "https://youtu.be/RbIxYm3mKzI",
-    tagline: "Based on truly possible events.",
-  },
-  {
-    id: 8,
-    name: "The Batman",
-    backdrop:
-      "https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/5P8SmMzSNYikXpxil6BYzJ16611.jpg",
-    link: "/movie/the-batman-10205/",
-    trailer: "https://youtu.be/mqqft2x_Aa4",
-    tagline: "Unmask the truth.",
-  },
-];
-
 const settings = {
   dots: true,
   infinite: true,
   lazyLoad: true,
-  fade: true,
   autoplay: true,
   speed: 500,
   autoplaySpeed: 5000,
-  cssEase: "linear",
   pauseOnHover: true,
   slidesToShow: 1,
   slidesToScroll: 1,
