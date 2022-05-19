@@ -97,10 +97,8 @@ export const PosterContent = styled.div`
   position: relative;
   animation: fade-in 1s ease-in-out 0s both;
   @media (min-width: 1024px) {
-    min-width: 300px;
     width: 300px;
     height: 450px;
-    min-height: 450px;
     background-image: none;
   }
 `;
@@ -127,20 +125,17 @@ export const Poster = styled.img`
   top: 20px;
   left: 20px;
   width: calc(((100vw / 2.222222) - 40px) / 1.5);
-  min-width: calc(((100vw / 2.222222) - 40px) / 1.5);
   height: calc((100vw / 2.222222) - 40px);
-  min-height: calc((100vw / 2.222222) - 40px);
   border-radius: 8px;
   z-index: 4;
   animation: zoom-left 1s ease-in-out 0s;
+  background: var(--color-primary);
 
   @media (min-width: 1024px) {
     position: unset;
     display: block;
     width: 100%;
-    min-width: 100%;
     height: 100%;
-    min-height: 100%;
     border-width: 0px;
     outline: none;
     top: 0;
@@ -447,4 +442,10 @@ export const ShowtimeLink = styled.button`
     transform: scaleX(1);
     transform-origin: center left;
   }
+`;
+
+export const MovieName = styled.span`
+  color: var(--color-red);
+  font-family: inherit;
+  font-size: inherit;
 `;

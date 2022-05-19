@@ -13,6 +13,7 @@ import { FaPlay } from "react-icons/fa";
 import getVideoId from "get-video-id";
 import moment from "moment";
 import female from "../../images/people-female.svg";
+import noImage from "../../images/no-image.svg";
 import male from "../../images/people-male.svg";
 import { Tabs } from "antd";
 import { LoadingPageV0 } from "../../components/Loading/Loading";
@@ -96,7 +97,11 @@ export default function MovieDetail() {
                     </S.Button>
                   </S.Play>
                   <S.Poster
-                    src={BASE_API_POSTER_URL + movie.poster_path}
+                    src={
+                      movie.poster_path !== ""
+                        ? BASE_API_POSTER_URL + movie.poster_path
+                        : noImage
+                    }
                     alt={movie.title}
                   />
                 </S.PosterContent>
@@ -217,13 +222,18 @@ export default function MovieDetail() {
       {movie.isShowing === false ? (
         <>
           <S.NoShowtime>
-            We don't have any showtime for {movie.title}
+            We don't have any showtime for{" "}
+            <S.MovieName>{movie.title}</S.MovieName>
           </S.NoShowtime>
-          <S.NoShowtime>{movie.title} will be out soon.</S.NoShowtime>
+          <S.NoShowtime>
+            {" "}
+            <S.MovieName>{movie.title}</S.MovieName> will be out soon.
+          </S.NoShowtime>
         </>
       ) : movie.showtime.length === 0 ? (
         <S.NoShowtime>
-          We don't have any showtime for {movie.title}
+          We don't have any showtime for{" "}
+          <S.MovieName>{movie.title}</S.MovieName>
         </S.NoShowtime>
       ) : (
         <AntDesignTab tabPosition={"left"}>
@@ -274,7 +284,7 @@ export default function MovieDetail() {
       ) : (
         <div>
           {renderBackdrop()}
-          <Container>
+          <Container style={{ minHeight: "auto" }}>
             <SectionTitle mbZero w="106px">
               Top Cast
             </SectionTitle>
