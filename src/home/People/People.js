@@ -15,7 +15,7 @@ export default function People() {
   document.title = `People Popular - ${NEMO}`;
 
   const { actor, totalPages } = useSelector((state) => state.PeopleReducer);
-   const isLoading = useSelector((state) => state.LoadingReducer.isLoading);
+  const isLoading = useSelector((state) => state.LoadingReducer.isLoading);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -83,6 +83,18 @@ const S = {
     overflow: hidden;
     position: relative;
     background-color: var(--rgba-blue-magenta);
+
+    :hover #person-name {
+      display: block;
+    }
+  `,
+  Box: styled.div`
+    height: 100%;
+  `,
+  Image: styled.img`
+    width: 100%;
+    transition: all 0.5s ease-in-out;
+    animation: fade-in 1.5s ease-in-out 0s both;
     height: calc(((100vw - 5rem) / 2) * 1.5);
 
     @media (min-width: 768px) {
@@ -96,19 +108,6 @@ const S = {
     @media (min-width: 1440px) {
       height: calc(((1440px - 8rem) / 5) * 1.5);
     }
-
-    :hover #person-name {
-      display: block;
-    }
-  `,
-  Box: styled.div`
-    animation: fade-in 1.5s ease-in-out 0s both;
-    height: 100%;
-  `,
-  Image: styled.img`
-    width: 100%;
-    transition: all 0.5s ease-in-out;
-    height: inherit;
 
     :hover {
       transform: scale(1.2);
