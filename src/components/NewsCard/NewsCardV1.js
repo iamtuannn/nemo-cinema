@@ -54,8 +54,8 @@ const NewsCard = {
   `,
 
   Image: styled.img`
-    max-width: 100%;
-    min-height: 100%;
+    width: 100%;
+    height: 210px;
     background-color: var(--rgba-blue-magenta);
   `,
 

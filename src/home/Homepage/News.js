@@ -118,6 +118,7 @@ const Card = {
     width: 100%;
     background-position: center;
     background-size: cover;
+    min-height: 250px;
   `,
   NoImg: styled.img`
     width: 180px;
