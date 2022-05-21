@@ -156,7 +156,7 @@ export const getMoviesListAction = (movieName = "") => {
       let movies = [];
 
       result
-        .filter((movie) => movie.maPhim > 10000)
+        .filter((movie) => movie.maPhim > 10617 && movie.maPhim < 10645)
         .sort((a, b) =>
           Date.parse(a.ngayKhoiChieu) < Date.parse(b.ngayKhoiChieu) ? 1 : -1
         )
