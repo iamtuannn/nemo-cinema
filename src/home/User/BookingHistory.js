@@ -7,7 +7,7 @@ import styled from "styled-components";
 import { Container, Heading } from "../../styles/Styles";
 import bg from "../../images/bg.jpg";
 import moment from "moment";
-import { LoadingPageV0} from "../../components/Loading/Loading";
+import { LoadingPageV0 } from "../../components/Loading/Loading";
 
 export default function BookingHistory() {
   document.title = `Booking History - ${NEMO}`;
@@ -22,6 +22,7 @@ export default function BookingHistory() {
 
   useEffect(() => {
     dispatch(getAccountInfoAction({ taiKhoan: userLogin.taiKhoan }));
+    window.scroll(0, 0);
   }, [dispatch, userLogin.taiKhoan]);
 
   if (!localStorage.getItem(USER_LOGIN)) {
