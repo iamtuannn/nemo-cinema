@@ -102,6 +102,8 @@ export const getAccountInfoAction = (account) => {
 export const putUpdateUserAction = (userUpdate) => {
   return async (dispatch) => {
     try {
+      alertSuccess.title = "Update Success";
+      alertSuccess.text = "";
       await cyberSoftServices
         .put(`api/QuanLyNguoiDung/CapNhatThongTinNguoiDung`, userUpdate)
         .then(() => {
@@ -542,6 +544,7 @@ export const postShowTimeAction = (showtime, navigate) => async () => {
     await cyberSoftServices.post(`api/QuanLyDatVe/TaoLichChieu`, showtime);
 
     alertSuccess.title = "Successfully Added";
+    alertSuccess.text = "";
     Swal.fire({ ...alertSuccess, didDestroy: () => navigate("/admin/movie") });
   } catch (error) {
     alertFailure.title = "Add Failed";
