@@ -165,11 +165,14 @@ export const getMoviesListAction = (movieName = "") => {
         .forEach((movie) => {
           const isShowing = BREAK_DAY > Date.parse(movie.ngayKhoiChieu);
 
-          const { ...rest } = movie;
+          const hinhAnhUpdate = movie.hinhAnh.replace(/http/g, "https")
+
+          const { hinhAnh, ...rest } = movie;
 
           const movieUpdate = {
             ...rest,
             isShowing: isShowing,
+            hinhAnh: hinhAnhUpdate
           };
 
           movies.push(movieUpdate);
