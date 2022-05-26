@@ -1,7 +1,6 @@
 import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import * as Yup from "yup";
 import moment from "moment";
 import { Container, Heading, StyledButton } from "../../styles/Styles";
 import { AntDesignForm, AntDesignFormItem } from "../../styles/AntDesign";
@@ -34,12 +33,6 @@ export default function EditMovie() {
       maPhim: movie.maPhim,
       maNhom: movie.maNhom,
     },
-    validationSchema: Yup.object().shape({
-      tenPhim: Yup.string().required("Please input movie title!"),
-      trailer: Yup.string().required("Please input movie trailer - youtube"),
-      moTa: Yup.string().required("Please input movie overview"),
-      ngayKhoiChieu: Yup.string().required("Please chose a day"),
-    }),
     onSubmit: (values) => {
       let formData = new FormData();
 
@@ -76,54 +69,63 @@ export default function EditMovie() {
   };
 
   const handleChangeDatePicker = (value) =>
-    formik.setFieldValue("ngayKhoiChieu", moment(value).format(dateFormat));
+    formik.setFieldValue("ngayKhoiChieu", value.format(dateFormat));
+
+  const initialValues = [
+    {
+      name: ["tenPhim"],
+      value: formik.values.tenPhim,
+    },
+    {
+      name: ["trailer"],
+      value: formik.values.trailer,
+    },
+    {
+      name: ["moTa"],
+      value: formik.values.moTa,
+    },
+    {
+      name: ["ngayKhoiChieu"],
+      value: moment(formik.values.ngayKhoiChieu, dateFormat),
+    },
+  ];
 
   return (
     <Container>
-      <Heading>Edit Movie</Heading>
+      <Heading admin>Edit Movie</Heading>
       <AntDesignForm
-        onSubmitCapture={formik.handleSubmit}
+        onFinish={formik.handleSubmit}
         labelCol={{ sm: { span: 6 }, lg: { span: 3 } }}
+        fields={initialValues}
       >
-        <AntDesignFormItem label="Title">
-          <Input
-            name="tenPhim"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.tenPhim}
-          />
-          {formik.touched.tenPhim && formik.errors.tenPhim ? (
-            <div>{formik.errors.tenPhim}</div>
-          ) : null}
+        <AntDesignFormItem
+          label="Movie name"
+          name="tenPhim"
+          admin="true"
+          rules={[{ required: true, message: "Please input movie name." }]}
+        >
+          <Input onChange={formik.handleChange} onBlur={formik.handleBlur} />
         </AntDesignFormItem>
-        <AntDesignFormItem label="Trailer">
-          <Input
-            name="trailer"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.trailer}
-          />
-          {formik.touched.trailer && formik.errors.trailer ? (
-            <div>{formik.errors.trailer}</div>
-          ) : null}
+        <AntDesignFormItem
+          label="Trailer"
+          name="trailer"
+          rules={[{ required: true, message: "Please input youtube trailer." }]}
+        >
+          <Input onChange={formik.handleChange} />
         </AntDesignFormItem>
-        <AntDesignFormItem label="Overview">
-          <Input.TextArea
-            name="moTa"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.moTa}
-            rows={13}
-          />
-          {formik.touched.moTa && formik.errors.moTa ? (
-            <div>{formik.errors.moTa}</div>
-          ) : null}
+        <AntDesignFormItem
+          label="Overview"
+          name="moTa"
+          rules={[{ required: true, message: "Please input movie overview." }]}
+        >
+          <Input.TextArea onChange={formik.handleChange} rows={8} />
         </AntDesignFormItem>
-        <AntDesignFormItem label="Release Date">
+        <AntDesignFormItem
+          label="Release Date"
+          name="ngayKhoiChieu"
+          rules={[{ required: true, message: "Please chose a day." }]}
+        >
           <DatePicker format={dateFormat} onChange={handleChangeDatePicker} />
-          {formik.touched.ngayKhoiChieu && formik.errors.ngayKhoiChieu ? (
-            <div>{formik.errors.ngayKhoiChieu}</div>
-          ) : null}
         </AntDesignFormItem>
         <AntDesignFormItem label="Upload Poster">
           <input type="file" onChange={handleUpload} />
