@@ -165,14 +165,14 @@ export const getMoviesListAction = (movieName = "") => {
         .forEach((movie) => {
           const isShowing = BREAK_DAY > Date.parse(movie.ngayKhoiChieu);
 
-          const hinhAnhUpdate = movie.hinhAnh.replace(/http/g, "https")
+          const hinhAnhUpdate = movie.hinhAnh.replace(/http/g, "https");
 
           const { hinhAnh, ...rest } = movie;
 
           const movieUpdate = {
             ...rest,
             isShowing: isShowing,
-            hinhAnh: hinhAnhUpdate
+            hinhAnh: hinhAnhUpdate,
           };
 
           movies.push(movieUpdate);
@@ -767,5 +767,21 @@ export const putConnectionAction = (formData, id) => async (dispatch) => {
     alertFailure.title = "Update Connection Failed";
     Swal.fire({ ...alertFailure });
     console.log(error);
+  }
+};
+
+export const checkAdmin = (userName, navigate) => async () => {
+  try {
+    const checkAdmin = await cyberSoftServices
+      .get(
+        `/api/QuanLyNguoiDung/TimKiemNguoiDung?MaNhom=${GROUPID}&tuKhoa=${userName}`
+      )
+      .then((res) => res.data[0].maLoaiNguoiDung === "QuanTri");
+
+    if (!checkAdmin) {
+      navigate("/");
+    }
+  } catch (error) {
+    navigate("/");
   }
 };
